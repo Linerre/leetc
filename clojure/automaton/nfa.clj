@@ -1,5 +1,5 @@
 (ns automaton.nfa
-  (:require [clojure.set :refer [union]]))
+  (:require [clojure.set :refer [union intersection]]))
 
 (defn trans
   "Transition function that takes a state in Q and an input symbol in S
@@ -22,11 +22,11 @@
 ;;; NFA = (Q,S,d,qs,A)
 (def nfa1
   {:name "string-ends-with-01"
-   :Q [:q0 :q1 :q2],
-   :S #{"0", "1"},
-   :d trans,
-   :qs  :q0,
-   :A [:q2]})
+   :Q    #{:q0 :q1 :q2},
+   :S    #{"0", "1"},
+   :d    trans,
+   :qs   :q0,
+   :A    #{:q2}})
 
 (assert (= #{:q2} (apply (:d nfa1) [:q1 "1"])))
 (assert (= #{:q0} (apply (:d nfa1) [:q0])))
@@ -47,7 +47,7 @@
                         (union acc (apply (:d nfa1) [s (str char)])))
                       #{}
                       states))
-            ;; use set of states is necessary cuz the inner fn
+            ;; using set of states is necessary cuz the inner fn
             ;; loops through the set of states got from previous
             ;; computation of d(p,c)
             #{state}
@@ -56,3 +56,11 @@
 (assert (= #{:q0} (process-input :q0 "")))
 (assert (= #{:q0 :q1} (process-input :q0 "00")))
 (assert (= #{:q0 :q2} (process-input :q0 "00101")))
+
+;;; Accept if ture and reject otherwise
+(defn accept? [state input]
+  (let [halt-states (process-input state input)]
+    (not= #{} (intersection (:A nfa1) halt-states))))
+
+(assert (not (accept? :q0 "00111")))
+(assert (accept? :q0 "00101"))
