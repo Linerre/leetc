@@ -1,6 +1,7 @@
 (ns binary-search.find-peak-element)
 
 ;;; Leetcode 162: https://leetcode.cn/problems/find-peak-element/
+;;; Medium
 ;;; 1 <= nums.length <= 1000
 (defn find-peak-element [nums]
   (loop [left -1
