@@ -37,5 +37,39 @@
     (let [mid  (quot (count elements) 2)
           lvec (merge-sort (subvec elements 0 mid))
           rvec (merge-sort (subvec elements mid))]
-      (-> (into lvec rvec)
-          (merge-arr (dec mid))))))
+      (merge-arr (into lvec rvec) (dec mid)))))
+
+(assert (= [1 2 3 5 7 8] (merge-sort [3 8 1 7 2 5])))
+(assert (= [\a \b \c \d \e \f] (merge-sort [\c \e \d \a \f \b])))
+
+
+;;; This version is suggested by Claude
+(defn merge-arrays
+  "Merge two sorted sequences into a single sorted sequence"
+  [left right]
+  (loop [result []
+         left-remaining left
+         right-remaining right]
+    (cond
+      (empty? left-remaining) (into result right-remaining)
+      (empty? right-remaining) (into result left-remaining)
+
+      :else
+      (let [l (first left-remaining)
+            r (first right-remaining)]
+        (if (<= (compare l r) 0)
+          (recur (conj result l) (rest left-remaining) right-remaining)
+          (recur (conj result r) left-remaining (rest right-remaining)))))))
+
+(defn merge-sort-1
+  "Merge sort ELEMENTS in ascending order."
+  [elements]
+  (if (<= (count elements) 1)
+    elements
+    (let [mid (quot (count elements) 2)
+          left (merge-sort (subvec elements 0 mid))
+          right (merge-sort (subvec elements mid))]
+      (merge-arrays left right))))
+
+(assert (= [1 2 3 5 7 8] (merge-sort-1 [3 8 1 7 2 5])))
+(assert (= [\a \b \c \d \e \f] (merge-sort-1 [\c \e \d \a \f \b])))
