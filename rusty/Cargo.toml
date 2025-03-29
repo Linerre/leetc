@@ -1,0 +1,7 @@
+[package]
+name = "rusty"
+description = "Miscellaneous stuff around leetcode, algorithms, data structures"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
