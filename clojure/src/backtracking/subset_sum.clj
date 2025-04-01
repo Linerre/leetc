@@ -4,10 +4,11 @@
 ;;; see https://jeffe.cs.illinois.edu/teaching/algorithms/ (chapter 2.3)
 
 ;;; Suppose the source set is an array
-
-
+;;; This version creates and passes many arrays, which is less efficient
+;;; and is subject to StackOverflow once the array size grows to a certain level
+;;; For more detail about this algorithm, see chapter 2.3, pp. 77
 (defn subset-sum?
-  "Check if any subset of X[0..n] of source S sums to the given target T.
+  "Check if any subset of X[1..n] of source S sums to the given target T.
   Return true if there is at least one such X and false otherwise."
   [s t]
   (cond
