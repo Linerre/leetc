@@ -44,6 +44,7 @@
 
 
 ;;; This version is suggested by Claude
+;;; The Ocaml version is provided by Plragde in Functional Data Structures
 (defn merge-arrays
   "Merge two sorted sequences into a single sorted sequence"
   [left right]
@@ -73,3 +74,43 @@
 
 (assert (= [1 2 3 5 7 8] (merge-sort-1 [3 8 1 7 2 5])))
 (assert (= [\a \b \c \d \e \f] (merge-sort-1 [\c \e \d \a \f \b])))
+
+;;; Inspired by OCaml version from Plragde in FDS
+(defn split-lst
+  "Split a given vector into halves recusively
+  Return a pair of the splitted halves"
+  [l]
+  (cond
+    (empty? l)      [[] []]
+    (= 1 (count l)) [l []]
+    :else
+    (let [a  (first l)
+          b  (first (rest l))
+          ls (rest (rest l))
+          [f s] (split-lst ls)]
+      [(into [a] f) (into [b] s)])))
+
+(comment (split-lst [1 5 9 10 8 7]))
+(comment (split-lst [1 5 9 10 8]))
+
+;;; tail recusion version
+(defn split-lst-tr
+  "Split a given vector into halves recusively.
+  Return a pair of the splitted halves"
+  [l]
+  (loop [rm l]
+    (cond
+      (empty? rm)      [[] []]
+      (= 1 (count rm)) [l []]
+      :else
+      (let [a  (first rm)
+            b  (first (rest rm))
+            ls (rest (rest rm))]
+        (cond
+          (empty? ls) [[a] [b]]
+          (= 2 (count ls)) [(conj [] a (first ls)) (conj [] b (last ls))]
+          :else
+          (recur ls))))))
+
+(comment (split-lst [1 5 9 10 8 7]))    ;; [[1 9 8] [5 10 7]]
+(comment (split-lst [1 5 9 10 8]))      ;; [[1 9 8] [5 10]]
