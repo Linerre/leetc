@@ -98,19 +98,34 @@
   "Split a given vector into halves recusively.
   Return a pair of the splitted halves"
   [l]
-  (loop [rm l]
-    (cond
-      (empty? rm)      [[] []]
-      (= 1 (count rm)) [l []]
-      :else
-      (let [a  (first rm)
-            b  (first (rest rm))
-            ls (rest (rest rm))]
-        (cond
-          (empty? ls) [[a] [b]]
-          (= 2 (count ls)) [(conj [] a (first ls)) (conj [] b (last ls))]
-          :else
-          (recur ls))))))
+  (cond
+    (empty? l)      [[] []]
+    (= 1 (count l)) [l []]
+    (= 2 (count l)) [[(first l)] [(last l)]]
+    :else
+    (loop [a  (conj [] (first l))
+           b  (conj [] (first (rest l)))
+           ls (rest (rest l))]
+      (cond
+        (empty? ls) [a b]
+        (= 1 (count ls)) [(conj a (first ls)) b]
+        (= 2 (count ls)) [(conj a (first ls)) (conj b (last ls))]
+        :else
+        (let [na  (conj a (first ls))
+              nb  (conj b (first (rest ls)))
+              nls (rest (rest ls))]
+          (recur na nb nls))))))
 
-(comment (split-lst [1 5 9 10 8 7]))    ;; [[1 9 8] [5 10 7]]
-(comment (split-lst [1 5 9 10 8]))      ;; [[1 9 8] [5 10]]
+(comment (split-lst-tr [1 5 9 10 8 7]))
+(comment (split-lst-tr [1 5 9 10 8]))
+
+(defn msort [l]
+  (cond
+    (empty? l) l
+    (= 1 (count l)) l
+    :else
+    (let [[ls rs] (split-lst-tr l)]
+      (merge-arrays (msort ls) (msort rs)))))
+
+(comment (msort [1 5 9 10 8 7]))
+(comment (msort [99 5 9 10 2]))
