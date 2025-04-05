@@ -1,8 +1,8 @@
 /// Merge sort using recursion
 
-/// Merge two sorted subarrays into a single array.
-/// `m` is the middle point index with original array size less than 2^33
-/// This version follows the pseudo code in chap2.3 of Algorithms by Jeff Erickson
+// Merge two sorted subarrays into a single array.
+// `m` is the middle point index with original array size less than 2^33
+// This version follows the pseudo code in chap2.3 of Algorithms by Jeff Erickson
 pub fn merge1<T: Ord + Clone + Default>(src_arr: &mut [T], m: usize) {
     let n = src_arr.len();
     let mut i = 0usize;
@@ -12,15 +12,13 @@ pub fn merge1<T: Ord + Clone + Default>(src_arr: &mut [T], m: usize) {
         dest.push(T::default());
     }
     for k in 0..n {
-        if j >= n {                       // right subarray is empty
+        if j >= n {                       // right subarray becomes empty
             dest[k] = src_arr[i].clone(); // src_arr[i] is the smallest
             i += 1;
-        }
-        else if i > m {                   // left subarray is empty
+        } else if i > m {                 // left subarray becomes empty
             dest[k] = src_arr[j].clone(); // src_arr[j] is the smallest
             j += 1;
-        }
-        else if src_arr[i] < src_arr[j] {
+        } else if src_arr[i] < src_arr[j] {
             dest[k] = src_arr[i].clone();
             i += 1;
         } else {
