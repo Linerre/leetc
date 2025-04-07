@@ -1,34 +1,50 @@
 (ns backtracking.longest-subseq)
 
-(defn lisbigger [nums]
-  (loop [ret []
-         prev (first nums)
-         next (first (rest nums))
-         rm (rest (rest nums))]
-    (println prev)
-    (println next)
-    (println ret)
-
+;;; Implementation of the LISBigger in chapter 2.6 of Algorithms by Jeff Eirckson
+;;; see: https://jeffe.cs.illinois.edu/teaching/algorithms/book/02-backtracking.pdf
+;;; It is hard for this algorithm to be tail recursive without an auxilary function
+;;; The below version is not tail optiomized recursion
+(defn lisbigger
+  "Find the longest increasing subsequence in the ginven vector `nums`.
+  `prev` is the starting point and must be the number at index 0.
+  Return the length of the such a sequence."
+  [prev nums]
+  (let [next (first nums)
+        rm (rest nums)]
     (cond
-      (empty? nums) ret
-      (nil? next) (conj ret prev)
-      (empty? rm) (if (< prev next) (conj ret next) (conj ret prev))
-      (< next prev) (recur ret prev (first rm) (rest rm))
-      :else                             ; prev <= next
-      (let [nnext (first rm)]
-        (cond
-          (empty? (rest rm))
-          (if (< next nnext) (conj ret prev next nnext) (conj ret prev next))
+      (empty? nums) 0
+      (nil? next) 1
+      (empty? rm) (if (< prev next) 2 1)
+      (<= next prev) (lisbigger prev rm)
+      :else
+      (let [skip (lisbigger prev rm)
+            take (lisbigger next rm)]
+        (max skip (inc take))))))
 
-          (< next nnext) (recur (conj ret prev next nnext) next nnext (rest rm))
+(assert (= 2 (lisbigger 4 [4 3 1 9])))
+(assert (= 4 (lisbigger 3 [3, 1, 5, 2, 7, 4, 8])))
+(assert (= 5 (lisbigger 1 [1 2 3 4 5])))
 
-          :else
-          (recur (conj ret prev next) next (first (rest rm)) (rest rm)))))))
+;;; Suggested by Claude which is buggy
+#_(defn lisbigger
+  "Find the longest increasing subsequence where all elements are larger than A[i]."
+  [nums i j]
+  (cond
+    (>= j (count nums))
+    0
 
-(comment (lisbigger []))
-(comment (lisbigger [1]))
-(comment (lisbigger [1 2]))
-(comment (lisbigger [4 3 1 9]))
-;; prev 4 > next 3
-(comment (lisbigger [4 3 1 9 8 6 7 5 9]))
-(comment (lisbigger [4 3 1 10 8 9 6 7 5 9]))
+    (>= (get nums i) (get nums j))
+    (lisbigger nums i (inc j))
+
+    :else
+    (let [skip (lisbigger nums i (inc j))
+          take (+ 1 (lisbigger nums j (inc j)))]
+      (max skip take))))
+
+;; To find LIS starting from index 0
+#_(defn lis [nums]
+  (if (empty? nums)
+    0
+    (lisbigger nums 0 1)))
+
+#_(comment (lis [3 1 5 2 7 4 8]))
