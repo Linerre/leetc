@@ -2,54 +2,94 @@
   "Single is simple"
   (:require [clojure.string :as string]))
 
-(defprotocol ISinglyList
-  (set-next [this next-node])
-  (count-nodes [this]))
-
-(deftype ListNode [value next]
-  ISinglyList
-  (set-next [this next-node]
-    (if (identical? (.next this) next-node)
-      this
-      (ListNode. (.value this) next-node)))
-  (count-nodes [this] (loop [cnt 1
-                             cur this]
-                        (if (nil? (.next cur))
-                          cnt
-                          (recur (inc cnt) (.next cur))))))
-
-(comment
-  (let [a (ListNode. 1 nil)
-        b (ListNode. 2 nil)]
-    (-> (set-next a b)
-        (.next)
-        (.value))))
+(deftype ListNode [value next])
 
 (defn make-linked-list
   "Create a head-only singly linked list.  Return the head."
   [value]
   (ListNode. value nil))
 
+(defn count-nodes [head]
+  (loop [cnt 1
+         cur head]
+    (if (nil? (.next cur))
+      cnt
+      (recur (inc cnt) (.next cur)))))
+
+;; O(1)
 (defn prepend-node [current value]
   (ListNode. value current))
 
 (defn print-list
   [head]
-  (loop [cur head
-         vals [(.value cur)]]
-    (if (nil? (.next cur))
-      (println (string/join " -> " vals))
-      (recur (.next cur) (conj vals (-> cur .next .value))))))
+  (if (nil? head)
+    (println "Empty list")
+    (loop [cur  head
+           vals [(.value cur)]]
+      (if (nil? (.next cur))
+        (println (string/join " -> " vals))
+        (recur (.next cur) (conj vals (-> cur .next .value)))))))
 
 ;; Leetcode 206
 ;; 1 -> 2 -> 3 -> 4 -> 5
 ;; 5 -> 4 -> 3 -> 2 -> 1
 (defn reverse-list [head]
   (loop [prev nil
-         cur head]
-    (if (nil? cur)
+         curn head]
+    (if (nil? curn)
       prev
-      (recur (prepend-node (.value cur) prev) (.next cur)))))
+      (recur (prepend-node prev (.value curn)) (.next curn)))))
+
+(comment
+  (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
+      (reverse-list)
+      (print-list)))
+
+;; O(n)
+(defn take-n-nodes-reverse
+  "Take n nodes starting with head. The resulted linked list is a perfectly
+  reversed one. If n is larger than the list length, equivalent to reversing
+  the entire list."
+  [head n]
+  (if (nil? head)
+    head
+    (loop [lst nil
+           curn head
+           cnt 1]
+      (if (or (nil? (.next curn)) (= cnt n))
+        (prepend-node lst (.value curn))
+      (recur (prepend-node lst (.value curn)) (.next curn) (inc cnt))))))
+
+(comment
+  (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
+      (take-n-nodes-reverse 3)
+      (print-list)))
+
+(defn take-n-nodes [head n]
+  (if (nil? head)
+    nil
+    (-> head
+      (take-n-nodes-reverse n)
+      (reverse-list))))
+
+(comment
+  (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
+      (take-n-nodes 3)
+      (print-list)))
+
+;; O(n)
+(defn prepend-list [node lst]
+  (loop [n (count-nodes lst)
+         head node
+         curn (reverse-list lst)]
+    (if (zero? n)
+      head
+      (recur (dec n) (prepend-node head (.value curn)) (.next curn)))))
+
+(comment
+  (->> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
+       (prepend-list (ListNode. 6 nil))
+       (print-list)))
 
 (defn find-prev
   "Position is 1-indexed and is guaranteed to be <= list length.
