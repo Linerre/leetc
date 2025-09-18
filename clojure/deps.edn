@@ -1,7 +1,4 @@
 {
- :deps {org.clojure/clojure  {:mvn/version "1.12.0"}}
+ :deps {org.clojure/clojure  {:mvn/version "1.12.2"}}
  :paths ["src"]
- ;; :alias
- ;; {:clj
- ;;  {:jvm-opts ["-Djdk.attach.allowAttachSelf"]}}
 }
