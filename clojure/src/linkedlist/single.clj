@@ -163,28 +163,31 @@
       (print-list)))
 
 ;; Leetcode 25
-#_(defn reverse-k-nodes
-    "Split the linked list into len / k groups and reverse each group."
-    [head k]
-    (let [n (count-nodes head)
-          dummy (insert-node (ListNode. -1 nil) head)]
-      (loop [m n
-             step k
-             prev nil
-             curn (.next dummy)]
-        (if (< m k)
-          prev
-          (recur (- m k)
-                 (+ k step)
-                 (reverse-list-partial curn (dec step) k)
-                 (-> curn .next .next))))))
+(defn reverse-k-group
+  [head k]
+  (let [l     (count-nodes head)
+        m     (rem l k)                    ; number of out-of-k-group nodes
+        rhead (reverse-list head)]
+    (loop [rcurn  (if (zero? m) rhead (find-next rhead m)) ; skip m nodes in reverse
+           group  (take-n-nodes rcurn k) ; get each group in reverse
+           cnt    0                        ; count number of nodes reversed
+           mnodes (if (zero? m) nil (take-n-nodes-reverse rhead m))]
+      ;; (if (nil? rcurn) (println "end") (println "curn-val=" (.value rcurn)))
+      ;; (print-list group)
+      ;; (print-list mnodes)
+      (if (or (nil? rcurn) (= l (+ m cnt)))
+        mnodes
+        (recur (find-next rcurn k)
+               (take-n-nodes (find-next rcurn k) k)
+               (+ k cnt)
+               (prepend-list mnodes group))))))
 
-#_(comment
+(comment
   (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
-      (reverse-list-partial 1 2)
+      (reverse-k-group 2)
       (print-list)))
 
-#_(comment
-  (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
-      (reverse-k-nodes 2)
+(comment
+  (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 (ListNode. 6 nil))))))
+      (reverse-k-group 3)
       (print-list)))
