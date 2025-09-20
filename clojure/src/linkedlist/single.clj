@@ -96,11 +96,13 @@
   This is equivalent to return previous node of the given positoin.
   If the given position is 1 (head), return the dummy node."
   [dummy position]
-  (loop [curn dummy
-         curp 0]
-    (if (= curp (dec position))
-      curn
-      (recur (.next curn) (inc curp)))))
+  (if (nil? dummy)
+    nil
+    (loop [curn dummy
+           curp 0]
+      (if (= curp (dec position))
+        curn
+        (recur (.next curn) (inc curp))))))
 
 (comment
   (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
@@ -112,19 +114,24 @@
   "Position is 1-indexed is guaranteed to be <= list length.
   No need for dummy in this search"
   [head position]
-  (loop [curn head
-         curp 1]
-    (if (= curp position)
-      (.next curn)
-      (recur (.next curn) (inc curp)))))
+  (if (nil? head)
+    nil
+    (loop [curn head
+           curp 1]
+      (if (= curp position)
+        (.next curn)
+        (recur (.next curn) (inc curp))))))
 
 (defn find-node
+  "`position` is gunranteeded to be <= list length."
   [head position]
-  (loop [curn head
-         curp 1]
-    (if (= curp position)
-      curn
-      (recur (.next curn) (inc curp)))))
+  (if (nil? head)
+    nil
+    (loop [curn head
+           curp 1]
+      (if (= curp position)
+        curn
+        (recur (.next curn) (inc curp))))))
 
 (comment
   (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
@@ -139,15 +146,15 @@
   "Reverse the part (1 <= left <= right) of the given list starting with head."
   [head left right]
   (let [dummy    (prepend-node head "dummy")
-        nl       (find-prev dummy left)
+        pn       (find-prev dummy left)
         ;; FIXME: better to not run this search
         ;; get the rest list immediately after right
         nr       (find-next head right)]
     (loop [prev nr                 ; start prepending onto to the rest
-           curn (.next nl)
+           curn (.next pn)
            cnt  0]
       (if (= cnt (+ 1 (- right left)))
-        (loop [oprev nl
+        (loop [oprev pn
                ret prev
                pos (dec left)]
           (if (= pos 0)
@@ -160,6 +167,10 @@
 (comment
   (-> (ListNode. 1 (ListNode. 2 (ListNode. 3 (ListNode. 4 (ListNode. 5 nil)))))
       (reverse-between 1 2)
+      (print-list))
+
+  (-> (ListNode. 1 nil)
+      (reverse-between 1 1)
       (print-list)))
 
 ;; Leetcode 25
