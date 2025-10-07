@@ -123,7 +123,7 @@
         (recur (.next curn) (inc curp))))))
 
 (defn find-node
-  "`position` is gunranteeded to be <= list length."
+  "`position` is guaranteed to be <= list length."
   [head position]
   (if (nil? head)
     nil
