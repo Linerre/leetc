@@ -1,3 +1,16 @@
+pub fn quick_sort1(arr: &mut Vec<i32>, l: usize, r: usize)  {
+    if l >= r {
+        return;
+    }
+
+    // Since std::random is nightly-only feature, here we always use
+    // the last item as if it was picked up randomly
+    let x = *(arr.last().unwrap());
+    let mid = partition1(arr, l, r, x);
+    quick_sort1(arr, l, mid - 1);
+    quick_sort1(arr, l, mid + 1);
+}
+
 /// Given a vector of numbers, left/start and right/end, and a pivot
 /// number, partition it as follows:
 /// [any number <= pivot, pivot, any number > pivot]
@@ -30,30 +43,51 @@ pub fn partition1(arr: &mut Vec<i32>, l: usize, r: usize, x: i32) -> usize {
     a - 1
 }
 
-pub fn quick_sort1(arr: &mut Vec<i32>, l: usize, r: usize)  {
-    if l >= r {
-        return;
+/// Optimized parition1 which has two bourdary sentinels: a and b
+/// numbers left to arr[a] all < x
+/// numbers right to arr[b] all > x
+/// 1. arr[i] < x, swap(a, i); a++; i++
+/// 2. arr[i] ==x, i++;
+/// 3. arr[i] > x, swap(b, i); b--;
+pub fn partition2(arr: &mut Vec<i32>, l: usize, r: usize, x: i32) -> (usize, usize) {
+    let mut a: usize = l;
+    let mut b: usize = r;
+    let mut i: usize = l;
+    while i <= b {
+        let curr = arr[i];
+        if i <= b {
+            if curr == x {
+                i += 1;
+            } else if curr < x {
+                arr.swap(a, i);
+                a += 1;
+                i += 1;
+            } else {
+                arr.swap(i, b);
+                b -= 1;
+            }
+        }
     }
-
-    // Since std::random is nightly-only feature, here we always use
-    // the last item as if it was picked up randomly
-    let x = *(arr.last().unwrap());
-    let mid = partition1(arr, l, r, x);
-    quick_sort1(arr, l, mid - 1);
-    quick_sort1(arr, l, mid + 1);
+    (a, b)
 }
-
 
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
-    fn test_partition() {
+    fn test_partition1() {
         let mut arr: Vec<i32> = vec![2, 5, 4, 3, 1, 4, 7, 9, 10, 8];
         let b = partition1(&mut arr, 0, 9, 4);
         println!("{}", b);
         assert_eq!(&arr, &[2,4,3,1,4,5,7,9,10,8]);
         assert_eq!(b, 4)
+    }
+
+    #[test]
+    fn test_partition2() {
+        let mut arr: Vec<i32> = vec![3,2,5,2,4,3,5,6,7,9,6];
+        let (_a, _b) = partition2(&mut arr, 0, 10, 5);
+        assert_eq!(&arr, &[3,2,2,4,3,5,5,7,9,6,6]);
     }
 }
