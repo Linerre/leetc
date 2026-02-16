@@ -63,7 +63,7 @@ pub fn partition2(arr: &mut Vec<i32>, l: usize, r: usize, x: i32) -> (usize, usi
                 a += 1;
                 i += 1;
             } else {
-                arr.swap(i, b);
+                arr.swap(b, i);
                 b -= 1;
             }
         }
