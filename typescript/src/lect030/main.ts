@@ -17,7 +17,22 @@ export function getMax1(a: number, b: number): number {
 }
 
 export function getMax2(a: number, b: number): number {
-    return 0;
+    const c = a - b;
+    const sa = signBit(a);
+    const sb = signBit(b);
+    const sc = signBit(c);
+
+    // diff == 1 then a and b have different signs; otherwise diff == 0 indicates the opposite
+    const diff = sa ^ sb;
+    // same == 1 then a and b have the same sign; othersiw same == 0 indicates the opposite
+    const same = flip(diff);
+
+    // Return a in either of the following conditions:
+    // 1. When a and b have opposite signs and a is non-negative
+    // 2. When a and b have the same sign and c is non-negative
+    const returnA = diff * sa + same * sc;
+    const returnB = flip(returnA);
+    return a * returnA + b * returnB;
 }
 
 
