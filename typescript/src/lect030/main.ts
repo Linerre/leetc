@@ -1,4 +1,3 @@
-
 // Works only when i != j
 export function swap(arr: number[], i: number, j: number): void {
     if (i === j) return;
@@ -33,6 +32,18 @@ export function getMax2(a: number, b: number): number {
     const returnA = diff * sa + same * sc;
     const returnB = flip(returnA);
     return a * returnA + b * returnB;
+}
+
+// https://leetcode.com/problems/missing-number/description/
+export function missingNumber(nums: number[]): number {
+    let eorAll = 0;
+    let eorHas = 0;
+    for (let i = 0; i < nums.length; i++) {
+        eorAll ^= i;
+        eorHas ^= nums[i];
+    }
+    eorAll ^= nums.length;
+    return eorAll ^ eorHas;
 }
 
 

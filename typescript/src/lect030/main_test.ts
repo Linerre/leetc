@@ -1,5 +1,5 @@
 import { assertEquals, assertFalse } from "jsr:@std/assert";
-import { swap, getMax1, getMax2 } from './main.ts';
+import { swap, getMax1, getMax2, missingNumber } from './main.ts';
 
 Deno.test('Test swap elements', () => {
     const arr = [1, -3, 2, 5, 8, 10, 321, 9];
@@ -28,4 +28,13 @@ Deno.test('Test getMax2', () => {
     const b = Number.MAX_VALUE; // 1.7976931348623157E+308
     const max = getMax2(a, b);
     assertEquals(max, b);
+})
+
+Deno.test('Test missingNumber', () => {
+    const nums1 = [3,0,1];
+    assertEquals(missingNumber(nums1), 2);
+    const nums2 = [0,1];
+    assertEquals(missingNumber(nums2), 2);
+    const nums3 = [9,6,4,2,3,5,7,0,1];
+    assertEquals(missingNumber(nums3), 8);
 })
