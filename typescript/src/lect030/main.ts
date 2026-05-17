@@ -34,7 +34,7 @@ export function getMax2(a: number, b: number): number {
     return a * returnA + b * returnB;
 }
 
-// https://leetcode.com/problems/missing-number/description/
+// 268: https://leetcode.com/problems/missing-number/description/
 export function missingNumber(nums: number[]): number {
     let xorAll = 0;
     let xorHas = 0;
@@ -46,11 +46,35 @@ export function missingNumber(nums: number[]): number {
     return xorAll ^ xorHas;
 }
 
-// https://leetcode.com/problems/single-number
+// 136: https://leetcode.com/problems/single-number
 export function singleNumber(nums: number[]): number {
     const xor = 0;
     // for (const num of nums) xor ^= num;
     return nums.reduce((acc, num) => acc ^ num, xor);
+}
+
+// 260: https://leetcode.com/problems/single-number-iii/
+export function doubleNumber(nums: number[]): number[] {
+    const xor = 0;
+    // calculate xor sum of the array, including the two target nums, e.g a, b
+    // this essentially gives a ^ b, which must has at least 1 bit of 1
+    const xorSum1 = nums.reduce((acc, num) => acc ^ num, xor);
+
+    // extract the rightmost bit that is 1
+    // Brian Kernighan
+    const rone = xorSum1 & (-xorSum1);
+
+    let xorSum2 = 0;
+    // calculate xor sum of the array, excluding the two target nums
+    // this essentially gives either a or b
+    for (let num of nums) {
+        // xor with nums whose same bit position as that of xorSum1 is NOT 1 (i.e. 0)
+        // thus, xxxxx0xx & 00000100 = 0
+        if ((num & rone) == 0) {
+            xorSum2  ^= num;
+        }
+    }
+    return [xorSum2, xorSum1 ^ xorSum2];
 }
 
 

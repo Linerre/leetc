@@ -1,8 +1,9 @@
-import { assertEquals, assertFalse } from "jsr:@std/assert";
+import {  assert, assertEquals, assertFalse } from "jsr:@std/assert";
 import {
     swap,
     getMax1,
     getMax2,
+    doubleNumber,
     missingNumber,
     singleNumber,
 } from './main.ts';
@@ -52,4 +53,19 @@ Deno.test('Test singleNumber', () => {
     assertEquals(singleNumber(nums1), 1);
     assertEquals(singleNumber(nums2), 4);
     assertEquals(singleNumber(nums3), 1);
+})
+
+Deno.test('Test doubleNumber', () => {
+    const nums1 = [1,2,1,3,2,5];
+    const nums2 = [-1,0];
+    const nums3 = [0,1];
+    const ret1 = doubleNumber(nums1);
+    const ret2 = doubleNumber(nums2);
+    const ret3 = doubleNumber(nums3);
+    assertEquals(ret1.length, 2);
+    assert(ret1.includes(3) && ret1.includes(5));
+    assertEquals(ret2.length, 2);
+    assert(ret2.includes(-1) && ret2.includes(0));
+    assertEquals(ret3.length, 2);
+    assert(ret3.includes(0) && ret3.includes(1));
 })
