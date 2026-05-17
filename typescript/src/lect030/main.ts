@@ -36,14 +36,21 @@ export function getMax2(a: number, b: number): number {
 
 // https://leetcode.com/problems/missing-number/description/
 export function missingNumber(nums: number[]): number {
-    let eorAll = 0;
-    let eorHas = 0;
+    let xorAll = 0;
+    let xorHas = 0;
     for (let i = 0; i < nums.length; i++) {
-        eorAll ^= i;
-        eorHas ^= nums[i];
+        xorAll ^= i;
+        xorHas ^= nums[i];
     }
-    eorAll ^= nums.length;
-    return eorAll ^ eorHas;
+    xorAll ^= nums.length;
+    return xorAll ^ xorHas;
+}
+
+// https://leetcode.com/problems/single-number
+export function singleNumber(nums: number[]): number {
+    const xor = 0;
+    // for (const num of nums) xor ^= num;
+    return nums.reduce((acc, num) => acc ^ num, xor);
 }
 
 
