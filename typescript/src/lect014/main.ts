@@ -69,3 +69,71 @@ export class StackQueue {
         return this.in.isEmpty() && this.out.isEmpty();
     }
 }
+
+// Implement stack using queue
+class Queue {
+    #queue: number[];
+    l: number;
+    r: number;
+
+    constructor() {
+        this.#queue = Array();
+        this.l = 0;
+        this.r = 0;
+    }
+
+    isEmpty(): boolean {
+        return this.l === this.r;
+    }
+
+    // Put in a new item
+    offer(n: number): void {
+        this.#queue[this.r++] = n;
+    }
+
+    poll(): number {
+        return this.#queue[this.l++];
+    }
+
+    head(): number {
+        return this.#queue[this.l];
+    }
+
+    tail(): number {
+        return this.#queue[this.r-1];
+    }
+
+    size(): number {
+        return this.r - this.l;
+    }
+}
+
+// Easy 225: https://leetcode.com/problems/implement-stack-using-queues/
+export class QueueStack {
+    queue: Queue;
+
+    constructor() {
+        this.queue = new Queue();
+    }
+
+    // O(n): insert the new item and re-insert all of the rest after the new item
+    push(x: number): void {
+        const n = this.queue.size();
+        this.queue.offer(x);
+        for (let i = 0; i < n; i++) {
+            this.queue.offer(this.queue.poll());
+        }
+    }
+
+    pop(): number {
+        return this.queue.poll();
+    }
+
+    top(): number {
+        return this.queue.head();
+    }
+
+    empty(): boolean {
+        return this.queue.isEmpty();
+    }
+}
