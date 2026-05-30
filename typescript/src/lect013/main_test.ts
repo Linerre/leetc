@@ -1,5 +1,5 @@
 import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
-import { Queue, Stack } from './main.ts';
+import { Queue, Stack,CircularQueue } from './main.ts';
 
 
 Deno.test('Test array-based Queue', () => {
@@ -27,4 +27,17 @@ Deno.test('Test array-based Stack', () => {
     assertEquals(s.peek(), 66);
     assertEquals(s.size(), nums.length - 1);
     assertEquals(s.pop(), 66);
+})
+
+Deno.test('Test CircularQueue', () => {
+    const cq = new CircularQueue(3);
+    assert(cq.enQueue(1));
+    assert(cq.enQueue(2));
+    assert(cq.enQueue(3));
+    assertFalse(cq.enQueue(4));
+    assertEquals(cq.Rear(), 3);
+    assert(cq.isFull());
+    assert(cq.deQueue());
+    assert(cq.enQueue(4));
+    assertEquals(cq.Rear(), 4);
 })

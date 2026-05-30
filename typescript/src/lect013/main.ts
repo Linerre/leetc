@@ -75,3 +75,71 @@ export class Stack {
         return this._size;
     }
 }
+
+
+// Circular queue
+// 1. only when size < limit: put a new item at tail, inc tail or tail -> 0, inc size
+// 2. only when size > 0: pop a new item at head, inc head or head -> 0, dec size
+// 3. size controls if operation 1 or 2 can be done
+// 622: https://leetcode.com/problems/design-circular-queue/description/
+export class CircularQueue {
+    queue: number[];
+    l: number;                  // head
+    r: number;                  // tail
+    size: number;
+    limit: number;
+
+    constructor(limit: number) {
+        this.queue = new Array(limit);
+        this.limit = limit;
+        this.l = 0;
+        this.r = 0;
+        this.size = 0;
+    }
+
+    enQueue(value: number): boolean {
+        if (this.isFull()) {
+            return false;
+        } else {
+            this.queue[this.r] = value;
+            this.r = this.r === this.limit - 1 ? 0 : this.r + 1;
+            this.size++;
+            return true;
+        }
+    }
+
+    deQueue(): boolean {
+        if (this.isEmpty()) {
+            return false;
+        } else {
+            this.l = this.l === this.limit - 1 ? 0 : this.l + 1;
+            this.size--;
+            return true;
+        }
+    }
+
+    Front(): number {
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            return this.queue[this.l];
+        }
+    }
+
+    Rear(): number {
+        if (this.isEmpty()) {
+            return -1;
+        } else {
+            const last = this.r === 0 ? this.limit - 1 : this.r - 1;
+            return this.queue[last];
+        }
+    }
+
+    isEmpty(): boolean {
+        return this.size === 0;
+    }
+
+    isFull(): boolean {
+        return this.size === this.limit;
+    }
+}
