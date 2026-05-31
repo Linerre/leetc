@@ -14,7 +14,7 @@
 // 4. Tail deletion (r moves towards left):
 // - if r == 0, r moves to k - 1; r = k - 1;
 // - if r != 0, r moves to r - 1, r--;
-
+// Medium 641: https://leetcode.com/problems/design-circular-deque/description/
 export class CircularDequeu {
     deque: number[];
     limit: number;
