@@ -58,8 +58,10 @@ export function preOrder(head: TreeNode): number[] {
         let topHead: TreeNode | undefined;
         while (!stack.isEmpty()) {
             topHead = stack.pop();
-            console.log(head.val, ' ');
-            result.push(head.val);
+            if (topHead) {
+                console.log(topHead.val, ' ');
+                result.push(topHead.val);
+            }
             if (topHead && topHead.right !== null) {
                 stack.push(topHead.right);
             }
