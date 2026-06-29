@@ -50,8 +50,9 @@ export class Stack {
     #stack: number[];
     _size: number;
 
-    constructor(n: number) {
-        this.#stack = Array(n);
+    constructor(n: number | undefined) {
+        if (!n) this.#stack = Array();
+        else this.#stack = Array(n);
         this._size = 0;
     }
 
