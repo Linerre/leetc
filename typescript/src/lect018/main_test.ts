@@ -16,7 +16,23 @@ function newTree1(): TreeNode {
     return root;
 }
 
-Deno.test('Test preOrder without recursion', () => {
+Deno.test('Test preOrder without recursion 0', () => {
     const head = newTree1();
     assertEquals(preOrder(head), [1,2,4,5,3,6,7]);
-})
+});
+
+
+Deno.test('Test preorder without recursion 1', () => {
+    const root = new TreeNode(1);
+    root.right = new TreeNode(2);
+    root.right.right = new TreeNode(3);
+    assertEquals(preOrder(root), [1,2,3]);
+});
+
+Deno.test('Test preorder without recursion 2', () => {
+    const root = new TreeNode(1);
+    root.left = new TreeNode(4)
+    root.right = new TreeNode(2);
+    root.right.right = new TreeNode(3);
+    assertEquals(preOrder(root), [1,4,2,3]);
+});
