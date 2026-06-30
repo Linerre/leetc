@@ -48,7 +48,7 @@ export class Stack<T> {
 // 3. push its right node onto stack if any
 // 4. push its left node onto stack if any
 // 5. repeat 2-4
-export function preOrder(head: TreeNode): number[] {
+export function preOrder(head: TreeNode | null): number[] {
     // mainly for testing purposes
     const result = Array();
 
@@ -59,7 +59,7 @@ export function preOrder(head: TreeNode): number[] {
         while (!stack.isEmpty()) {
             topHead = stack.pop();
             if (topHead) {
-                console.log(topHead.val, ' ');
+                console.log(topHead.val);
                 result.push(topHead.val);
             }
             if (topHead && topHead.right !== null) {
@@ -69,7 +69,6 @@ export function preOrder(head: TreeNode): number[] {
                 stack.push(topHead.left);
             }
         }
-        console.log()
     }
 
     return result;
@@ -79,7 +78,7 @@ export function preOrder(head: TreeNode): number[] {
 // 1. Push all nodes along the left edge of substree head onto stack
 // 2. For each node in stack, pop it, print, repeat step 1 for all nodes along the right edge of this node
 // 3. Stop until there is no substree and stack is empty
-export function inOrder(head: TreeNode): number[] {
+export function inOrder(head: TreeNode | null): number[] {
     // mainly for testing purposes;
     const result = new Array();
     // For null head, return empty array, which basically does nothing
@@ -94,7 +93,7 @@ export function inOrder(head: TreeNode): number[] {
             } else {
                 h = stack.pop();
                 if (h) {
-                    console.log(h.val, ' ');
+                    console.log(h.val);
                     result.push(h.val);
                     h = h.right; // step 2
                 }
@@ -102,5 +101,39 @@ export function inOrder(head: TreeNode): number[] {
         }
     }
 
+    return result;
+}
+
+
+// Similar to preOrder but with one more stack to reverse the order
+export function postOrderWithTwoStacks(head: TreeNode | null): number[] {
+    // mainly for testing purposes
+    const result = Array();
+
+    if (head !== null) {
+        const stack = new Stack<TreeNode>();
+        const collect = new Stack<TreeNode>(); // for reversing the order
+        stack.push(head);
+        let topHead: TreeNode | undefined;
+        while (!stack.isEmpty()) {
+            topHead = stack.pop();
+            // collect instead of print
+            if (topHead) collect.push(topHead);
+            if (topHead && topHead.left !== null) {
+                stack.push(topHead.left);
+            }
+            if (topHead && topHead.right !== null) {
+                stack.push(topHead.right);
+            }
+        }
+        // print from collect stack
+        while (!collect.isEmpty()) {
+            let h = collect.pop();
+            if (h) {
+                console.log(h.val);
+                result.push(h.val);
+            }
+        }
+    }
     return result;
 }

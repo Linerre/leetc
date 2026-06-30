@@ -2,6 +2,7 @@ import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
 import {
     TreeNode,
     inOrder,
+    postOrderWithTwoStacks,
     preOrder,
 } from './main.ts';
 
@@ -23,14 +24,14 @@ Deno.test('Test preOrder without recursion 0', () => {
 });
 
 
-Deno.test('Test preorder without recursion 1', () => {
+Deno.test('Test preOrder without recursion 1', () => {
     const root = new TreeNode(1);
     root.right = new TreeNode(2);
     root.right.right = new TreeNode(3);
     assertEquals(preOrder(root), [1,2,3]);
 });
 
-Deno.test('Test preorder without recursion 2', () => {
+Deno.test('Test preOrder without recursion 2', () => {
     const root = new TreeNode(1);
     root.left = new TreeNode(4)
     root.right = new TreeNode(2);
@@ -38,12 +39,12 @@ Deno.test('Test preorder without recursion 2', () => {
     assertEquals(preOrder(root), [1,4,2,3]);
 });
 
-Deno.test('Test inorder without recursion 1', () => {
+Deno.test('Test inOrder without recursion 1', () => {
     const root = newTree1();
     assertEquals(inOrder(root), [4,2,5,1,6,3,7]);
 });
 
-Deno.test('Test inorder without recursion 2', () => {
+Deno.test('Test inOrder without recursion 2', () => {
     const root = new TreeNode(1);
     // left subtree
     root.left = new TreeNode(2);
@@ -56,6 +57,10 @@ Deno.test('Test inorder without recursion 2', () => {
     root.right.right = new TreeNode(8);
     root.right.right.left = new TreeNode(9);
     root.right.right.left.left = new TreeNode(10);
-
     assertEquals(inOrder(root), [4,6,5,2,7,1,3,10,9,8]);
+});
+
+Deno.test('Test postOrder without recursion 1', () => {
+    const root = newTree1();
+    assertEquals(postOrderWithTwoStacks(root), [4,5,2,6,7,3,1]);
 });
