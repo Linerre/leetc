@@ -1,6 +1,7 @@
 import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
 import {
     TreeNode,
+    inOrder,
     preOrder,
 } from './main.ts';
 
@@ -35,4 +36,26 @@ Deno.test('Test preorder without recursion 2', () => {
     root.right = new TreeNode(2);
     root.right.right = new TreeNode(3);
     assertEquals(preOrder(root), [1,4,2,3]);
+});
+
+Deno.test('Test inorder without recursion 1', () => {
+    const root = newTree1();
+    assertEquals(inOrder(root), [4,2,5,1,6,3,7]);
+});
+
+Deno.test('Test inorder without recursion 2', () => {
+    const root = new TreeNode(1);
+    // left subtree
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(4);
+    root.left.left.right = new TreeNode(5);
+    root.left.left.right.left = new TreeNode(6);
+    root.left.right = new TreeNode(7);
+    // right subtree
+    root.right = new TreeNode(3);
+    root.right.right = new TreeNode(8);
+    root.right.right.left = new TreeNode(9);
+    root.right.right.left.left = new TreeNode(10);
+
+    assertEquals(inOrder(root), [4,6,5,2,7,1,3,10,9,8]);
 });

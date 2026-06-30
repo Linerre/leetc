@@ -74,3 +74,33 @@ export function preOrder(head: TreeNode): number[] {
 
     return result;
 }
+
+// In-order without recursion
+// 1. Push all nodes along the left edge of substree head onto stack
+// 2. For each node in stack, pop it, print, repeat step 1 for all nodes along the right edge of this node
+// 3. Stop until there is no substree and stack is empty
+export function inOrder(head: TreeNode): number[] {
+    // mainly for testing purposes;
+    const result = new Array();
+    // For null head, return empty array, which basically does nothing
+    if (head !== null) {
+        const stack = new Stack<TreeNode>();
+        let h: TreeNode | null | undefined;
+        h = head;
+        while (!stack.isEmpty() || h) {
+            if (h) {
+                stack.push(h);
+                h = h.left;     // move head left down one level - step 1
+            } else {
+                h = stack.pop();
+                if (h) {
+                    console.log(h.val, ' ');
+                    result.push(h.val);
+                    h = h.right; // step 2
+                }
+            }
+        }
+    }
+
+    return result;
+}
