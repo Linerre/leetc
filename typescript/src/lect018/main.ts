@@ -137,3 +137,35 @@ export function postOrderWithTwoStacks(head: TreeNode | null): number[] {
     }
     return result;
 }
+
+
+export function postOrderWithOneStack(head: TreeNode | null): number[] {
+    const result: number[] = new Array();
+    if (head !== null) {
+        let h: TreeNode | null | undefined = head;
+        const stack = new Stack<TreeNode>();
+        stack.push(h)
+
+        // If no nodes get printed, h remains to be root
+        // If any node gets printed, h becomes that node
+        // after the first print, h represents last-printed node
+        while (!stack.isEmpty()) {
+            const cur = stack.peek();
+            if (cur && cur.left && h != cur.left && h != cur.right) {
+                // has left subtree and needs to process
+                stack.push(cur.left);
+            } else if (cur && cur.right && h != cur.right){
+                // has right substree and needs to process
+                stack.push(cur.right);
+            } else {
+                // either no left/right subtree or both have been processed
+                if (cur) {
+                    console.log(cur.val);
+                    result.push(cur.val);
+                }
+                h = stack.pop();
+            }
+        }
+    }
+    return result;
+}

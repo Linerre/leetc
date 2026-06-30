@@ -3,6 +3,7 @@ import {
     TreeNode,
     inOrder,
     postOrderWithTwoStacks,
+    postOrderWithOneStack,
     preOrder,
 } from './main.ts';
 
@@ -60,7 +61,12 @@ Deno.test('Test inOrder without recursion 2', () => {
     assertEquals(inOrder(root), [4,6,5,2,7,1,3,10,9,8]);
 });
 
-Deno.test('Test postOrder without recursion 1', () => {
+Deno.test('Test postOrderTwoStacks', () => {
     const root = newTree1();
     assertEquals(postOrderWithTwoStacks(root), [4,5,2,6,7,3,1]);
+});
+
+Deno.test('Test postOrderWithOneStack', () => {
+    const root = newTree1();
+    assertEquals(postOrderWithOneStack(root), [4,5,2,6,7,3,1]);
 });
