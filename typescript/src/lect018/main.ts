@@ -42,6 +42,7 @@ export class Stack<T> {
     }
 }
 
+// Easy 144: https://leetcode.com/problems/binary-tree-preorder-traversal/description/
 // Pre-order without recursion
 // 1. Push a non-null node into a stack
 // 2. if stack is not empty, pop the top node, print it
@@ -74,6 +75,7 @@ export function preOrder(head: TreeNode | null): number[] {
     return result;
 }
 
+// Easy 94: https://leetcode.com/problems/binary-tree-inorder-traversal/description/
 // In-order without recursion
 // 1. Push all nodes along the left edge of substree head onto stack
 // 2. For each node in stack, pop it, print, repeat step 1 for all nodes along the right edge of this node
@@ -104,7 +106,7 @@ export function inOrder(head: TreeNode | null): number[] {
     return result;
 }
 
-
+// Easy 145: https://leetcode.com/problems/binary-tree-postorder-traversal/description/
 // Similar to preOrder but with one more stack to reverse the order
 export function postOrderWithTwoStacks(head: TreeNode | null): number[] {
     // mainly for testing purposes
