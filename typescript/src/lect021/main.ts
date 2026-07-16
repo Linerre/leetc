@@ -4,15 +4,44 @@ const help: number[] = new Array(MAXN);
 
 export function sortArray(nums: number[]): number[] {
     if (nums.length > 1) {
+        // nums passed as a reference becuase Array is object
         mergeSort1(nums);
     }
     return nums;
 }
 
-// Work on a gloabl array
+export function sortArray2(nums: number[]): number[] {
+    if (nums.length > 1) {
+        // nums passed as a reference becuase Array is object
+        mergeSort2(nums);
+    }
+    return nums;
+}
+
 function mergeSort1(nums: number[]): void {
     sort(nums, 0, nums.length - 1);
 }
+
+function mergeSort2(nums: number[]): void {
+    const n = nums.length;
+    let l = 0;
+    let r, m;
+    for (let step = 1; step < n; step <<= 1) {
+        l = 0;
+        while (l < n) {
+            m = l + step - 1;
+            // if right part is nothing, break
+            if (m + 1 >= n) break;
+            // r can be either l + 2*step - 1 or n - 1
+            r = Math.min(l + (step << 1) - 1, n - 1);
+            merge(nums,l,m,r);
+            // go to next step
+            l = r + 1;
+        }
+
+    }
+}
+
 
 // Recursively partition the array into two parts and sort each part accordingly
 function sort(nums: number[], l: number, r: number): void {
