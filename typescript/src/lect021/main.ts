@@ -10,6 +10,8 @@ export function sortArray(nums: number[]): number[] {
     return nums;
 }
 
+// T: O(n * logn)
+// S: O(n)
 export function sortArray2(nums: number[]): number[] {
     if (nums.length > 1) {
         // nums passed as a reference becuase Array is object

@@ -15,9 +15,9 @@ Deno.test('Test merge sort 1-2', () => {
 })
 
 Deno.test('Test merge sort 2-1', () => {
-    const nums = [6,2,3,3,4,6,9,4,1];
+    const nums = [6,2,3,3,4,6,9,4,7];
     const sorted = sortArray2(nums);
-    assertEquals(sorted, [1,2,3,3,4,4,6,6,9]);
+    assertEquals(sorted, [2,3,3,4,4,6,6,7,9]);
 })
 
 Deno.test('Test merge sort 2-2', () => {
