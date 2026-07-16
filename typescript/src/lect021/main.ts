@@ -18,10 +18,12 @@ export function sortArray2(nums: number[]): number[] {
     return nums;
 }
 
+// Recursive implementation
 function mergeSort1(nums: number[]): void {
     sort(nums, 0, nums.length - 1);
 }
 
+// Non-recursive implemention
 function mergeSort2(nums: number[]): void {
     const n = nums.length;
     let l = 0;
