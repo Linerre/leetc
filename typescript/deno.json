@@ -5,9 +5,6 @@
   "imports": {
     "@std/assert": "jsr:@std/assert@1"
   },
-  "test": {
-    "include": ["src/lect*/*_test.ts"]
-  },
   "lint": {
     "include": ["src/"]
   }
