@@ -10,7 +10,8 @@ Deno.test('Test smallSum case-1', () => {
 
 Deno.test('Test smallSum case-2', () => {
     const nums = [2,1,6,4,5,3,7,8];
+    const expect = (1+2)+(1+2)+(1+2+4)+(1+2)+(1+2+6+4+5+3)+(1+2+6+4+5+3+7);
     const result = smallSum(nums, 0, nums.length -1);
     assertEquals(nums, [1,2,3,4,5,6,7,8]);
-    assertEquals(result, (1+2)+(1+2)+(1+2+4)+(1+2)+(1+2+6+4+5+3)+(1+2+6+4+5+3+7));
+    assertEquals(result, expect);
 })
