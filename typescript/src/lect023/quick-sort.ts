@@ -1,6 +1,8 @@
 /**
  * (For a quicksort pivot between `left` and `right` inclusive, use:
  * Math.floor(left + Math.random() * (right - left + 1)))
+ * Worst: O(n^2) and space with T(n), the rightmost/last num
+ * Best: O(n*logn) and space with T(logn), almost always num at mid
  * Medium 912: https://leetcode.cn/problems/sort-an-array/description/
  */
 export function quickSort(nums: number[], l: number, r: number): void {
