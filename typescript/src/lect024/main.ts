@@ -14,12 +14,12 @@ function randomSelect(nums: number[], i: number) {
     // r - l + 1 = length of the range,
     // random fn * range to get a random number of [0...len-1]
 
-    for (let l = 0, r = nums.lenth - 1; l <= r;) {
+    for (let l = 0, r = nums.length - 1; l <= r;) {
         const x = nums[Math.floor(l + Math.random() * (r - l + 1))];
         const {left, right} = partition(nums, l, r, x);
         if (i < left) {
             r = left - 1;
-        } else if (r > right) {
+        } else if (i > right) {
             l = right + 1;
         } else {
             result = nums[i];
