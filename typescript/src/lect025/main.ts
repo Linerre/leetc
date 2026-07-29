@@ -1,6 +1,9 @@
 // Medium 912: https://leetcode.cn/problems/sort-an-array/
 export function sortArray(nums: number[]): number[] {
+    if (nums.length > 1)
+        heapSort1(nums);
 
+    return nums;
 }
 
 function heapSort1(nums: number[]): void {
@@ -10,7 +13,7 @@ function heapSort1(nums: number[]): void {
         heapInsert(nums, i);
     }
     // Sort the heap by swapping largest (0) with last (n-1)
-    const size = n;
+    let size = n;
     while (size > 1) {
         // size dec by 1 first before passing to swap
         swap(nums, 0, --size);
