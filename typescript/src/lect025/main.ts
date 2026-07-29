@@ -6,14 +6,25 @@ export function sortArray(nums: number[]): number[] {
     return nums;
 }
 
+export function sortArray2(nums: number[]): number[] {
+    if (nums.length > 1)
+        heapSort2(nums);
+
+    return nums;
+}
+
+// Build heap top down
+// Total time complexity: O(n * logn)
 function heapSort1(nums: number[]): void {
     const n = nums.length;
     // Insert and adjust to maintain a large-root heap
+    // This process takes O(n * logn)
     for (let i = 0; i < n; i++) {
         heapInsert(nums, i);
     }
     // Sort the heap by swapping largest (0) with last (n-1)
     let size = n;
+    // This process takes O(n * logn)
     while (size > 1) {
         // size dec by 1 first before passing to swap
         swap(nums, 0, --size);
@@ -21,7 +32,22 @@ function heapSort1(nums: number[]): void {
     }
 }
 
+// Build heap bottom up, majority of nodes go short paths
 function heapSort2(nums: number[]): void {
+    const n = nums.length;
+    // Insert and adjust to maintain a large-root heap, bottom up
+    // This process takes O(n * logn)
+    for (let i = n - 1; i >= 0; i--) {
+        heapify(nums, i, n);
+    }
+    // Sort the heap by swapping largest (0) with last (n-1)
+    let size = n;
+    // This process takes O(n * logn)
+    while (size > 1) {
+        // size dec by 1 first before passing to swap
+        swap(nums, 0, --size);
+        heapify(nums, 0, size);
+    }
 
 }
 
