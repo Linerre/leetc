@@ -17,7 +17,7 @@ export function sortArray2(nums: number[]): number[] {
 // Total time complexity: O(n * logn)
 function heapSort1(nums: number[]): void {
     const n = nums.length;
-    // Insert and adjust to maintain a large-root heap
+    // Make the array into a large-root heap
     // This process takes O(n * logn)
     for (let i = 0; i < n; i++) {
         heapInsert(nums, i);
@@ -52,12 +52,11 @@ function heapSort2(nums: number[]): void {
 }
 
 /**
- * Insert a number into heap and maintain any substree in such a way
- * that the largest number always sits at the top of the subtree
+ * Re-arrange an array into a heap where any substree has largest number at top
  * @param: nums the array that represents a heap
  * @param: i the index at which the number to be inserted
  */
-function heapInsert(nums: number[], i: number): void {
+export function heapInsert(nums: number[], i: number): void {
     while (nums[i] > nums[Math.floor((i-1)/2)]) {
         swap(nums, i, Math.floor((i-1)/2));
         i = Math.floor((i-1)/2);
