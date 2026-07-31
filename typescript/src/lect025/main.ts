@@ -64,12 +64,12 @@ export function heapInsert(nums: number[], i: number): void {
 }
 
 /**
- * Push smaller number down to main the large-root heap structure
+ * Push smaller number down to maintain the large-root heap structure
  * @param: nums the array the represents a heap
  * @param: i index of current number
  * @param: size the array/heap size
  */
-function heapify(nums: number[], i: number, size: number): void {
+export function heapify(nums: number[], i: number, size: number): void {
     let l = i * 2 + 1;          // left child
     while (l < size) {
         // Has left child and right child

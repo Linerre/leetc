@@ -1,6 +1,7 @@
 import { assertEquals } from 'jsr:@std/assert';
 import {
     heapInsert,
+    heapify,
     sortArray,
     sortArray2
 } from './main.ts';
@@ -23,5 +24,11 @@ Deno.test('Heap sort 2', () => {
 Deno.test('Heap insert', () => {
     const nums = [1,2,3,4,6];
     heapInsert(nums, 4);
+    console.log(nums);
+})
+
+Deno.test('Heapify', () => {
+    const nums = [1,2,4,3,6,5];
+    heapify(nums, 2, 6);
     console.log(nums);
 })
