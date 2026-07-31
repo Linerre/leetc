@@ -48,7 +48,6 @@ function heapSort2(nums: number[]): void {
         swap(nums, 0, --size);
         heapify(nums, 0, size);
     }
-
 }
 
 /**

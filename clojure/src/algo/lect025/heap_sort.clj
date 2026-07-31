@@ -41,4 +41,26 @@
       heap)))
 
 (comment
-  (heapify [1,2,4,3,6,5] 2 6))
+  (assert (= (heapify [1,2,4,3,6,5] 2 6) [1, 2, 5, 3, 6, 4])))
+
+
+(defn heap-sort-1 [nums]
+  (let [heap (reduce (fn [h i] (heap-insert h i))
+                     nums
+                     (mapv first (map-indexed vector nums)))]
+    ;; It's hard to use reduce here because there are 2 states to carry
+    ;; 1. an array on which numbers are added from large to small
+    ;; 2. the array that represents the remaining heap
+    (loop [h heap
+           size (count nums)]
+      (if (< 1 size)
+        (recur (heapify (swap h 0 (dec size)) 0 (dec size)) (dec size))
+        h))))
+
+(comment
+  (assert (= (heap-sort-1 [1,2,4,3,6,5]) [1,2,3,4,5,6]))
+  (assert (= (heap-sort-1 [5,2,3,1]) [1,2,3,5]))
+  (assert (= (heap-sort-1 [5,1,1,2,0,0]) [0,0,1,1,2,5])))
+
+(comment
+  (assert (= (heap-sort-1 [19 7 3 20 1 15 8 8]) [1 3 7 8 8 15 19 20])))
