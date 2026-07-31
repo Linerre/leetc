@@ -10,6 +10,6 @@
 ## Index
 -
 - 025: Heap and heap sort
-  + TypeScript:
-  + Rust:
-  + Clojure:
+  + [Clojure](./clojure/src/algo/lect025/heap_sort.clj)
+  + [Rust](./rusty/src/lect025.rs)
+  + [TypeScript](./typescript/src/lect025/main.ts)
