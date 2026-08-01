@@ -1,8 +1,12 @@
 {
+  "compilerOptions": {
+    "target": "es2024"
+  },
   "tasks": {
     "dev": "deno run --watch main.ts"
   },
   "imports": {
+    "@datastructures-js/priority-queue": "npm:@datastructures-js/priority-queue@6.3.5",
     "@std/assert": "jsr:@std/assert@1"
   },
   "lint": {

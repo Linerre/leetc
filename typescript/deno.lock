@@ -2,7 +2,9 @@
   "version": "5",
   "specifiers": {
     "jsr:@std/assert@*": "1.0.19",
-    "jsr:@std/internal@^1.0.12": "1.0.12"
+    "jsr:@std/assert@1": "1.0.19",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
+    "npm:@datastructures-js/priority-queue@6.3.5": "6.3.5"
   },
   "jsr": {
     "@std/assert@1.0.19": {
@@ -15,9 +17,21 @@
       "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
     }
   },
+  "npm": {
+    "@datastructures-js/heap@4.3.7": {
+      "integrity": "sha512-Dx4un7Uj0dVxkfoq4RkpzsY2OrvNJgQYZ3n3UlGdl88RxxdHd7oTi21/l3zoxUUe0sXFuNUrfmWqlHzqnoN6Ug=="
+    },
+    "@datastructures-js/priority-queue@6.3.5": {
+      "integrity": "sha512-NmdmvLnkUyG67W6Iy8tP+865ILq5VDyZh90c8lHMOkYYydUNzOV0QNPCRAuj4AoHSm/V2DeuYvDKnvALaCwLvA==",
+      "dependencies": [
+        "@datastructures-js/heap"
+      ]
+    }
+  },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@1"
+      "jsr:@std/assert@1",
+      "npm:@datastructures-js/priority-queue@6.3.5"
     ]
   }
 }

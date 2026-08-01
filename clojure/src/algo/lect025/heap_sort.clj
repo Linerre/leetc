@@ -58,8 +58,7 @@
       ;; (println (heapify (swap h 0 (dec size)) 0 (dec size)))
       (if (< 1 size)
         (recur (heapify (swap h 0 (dec size)) 0 (dec size)) (dec size))
-        h))
-    ))
+        h))))
 
 (comment
   (assert (= (heap-sort-1 [1,2,4,3,6,5]) [1,2,3,4,5,6]))
@@ -83,15 +82,14 @@
                            [(heapify h i size) size])
                          [nums (count nums)]
                          (reverse (mapv first (map-indexed vector nums))))]
-    ;; It's hard to use reduce here because there are 2 states to carry
+    ;; It's hard to use reduce in the body because there are 2 states to carry
     ;; 1. an array on which numbers are added from large to small
     ;; 2. the array that represents the remaining heap
     (loop [h heap
            size (count nums)]
       (if (< 1 size)
         (recur (heapify (swap h 0 (dec size)) 0 (dec size)) (dec size))
-        h))
-    #_heap))
+        h))))
 
 (comment
   (heap-sort-2 [19 7 3 12 20 1 15 8 8]))
