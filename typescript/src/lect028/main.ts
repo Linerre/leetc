@@ -80,7 +80,7 @@ function radixSort(nums: number[], n: number, digits: number): void {
             help[cnts[d]] = nums[i];
         }
 
-        // Overwrite nums with help to reflect the sorted array
+        // Overwrite nums with help to reflect the order of this round
         for (let i = 0; i < n; i++) {
             nums[i] = help[i];
         }
