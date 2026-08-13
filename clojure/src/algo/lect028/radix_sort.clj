@@ -65,7 +65,8 @@
                     {:B (init-vec n) :C C :m (dec n)})
          (:B))))
 
-(comment (counting-sort [2 5 3 0 2 3 0 3] 8 5)) ;=> [0 0 2 2 3 3 3 5]
+(comment
+  (assert (= [0 0 2 2 3 3 3 5] (counting-sort [2 5 3 0 2 3 0 3] 8 5))))
 
 
 ;;; See CLRS 8.3 Radix sort
@@ -83,16 +84,11 @@
                                            {:ds [] :k 0}
                                            nums)
                     help           (counting-sort ds n k)]
-                ;; (println help)
-                ;; (println "res:" res)
                 (->> help
                      (reduce (fn [{:keys [old new] :as state} i]
-                               (let [t (first (filter #(== i (extract-digit % o)) old))]
-                                 ;; (println "target:" t)
-                                 ;; (println "old:" old)
-                                 ;; (println "new:" new)
+                               (let [t (first (filter #(= i (extract-digit % o)) old))]
                                  (-> state
-                                     (assoc :old (or (seq (remove #(== t %) old)) nums))
+                                     (assoc :old (or (seq (remove #(= t %) old)) nums))
                                      (assoc :new (conj new t)))))
                              {:old res :new []})
                      (:new))))
@@ -100,4 +96,3 @@
             offsets)))
 
 (comment (radix-sort [329 457 28 657 839 436 720 355] 8 3) )
-(comment (filter #(== 7 (extract-digit % 1)) [329 457 657 839 436 720 355]))
