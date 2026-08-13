@@ -46,7 +46,6 @@ function digits(n: number): number {
  * @param digits of the max number in array in BASE
  */
 function radixSort(nums: number[], n: number, digits: number): void {
-    // Loop through each digit in the number
     for (let offset = 1;  digits > 0; offset *= BASE, digits--) {
         cnts.fill(0);
         // extract a specific digit in ith number and
