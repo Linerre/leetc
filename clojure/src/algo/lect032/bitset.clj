@@ -1,12 +1,7 @@
 (ns bitset
   (:require [clojure.string :as string]))
 
-(defrecord Bitset
-    [^longs bits
-     ^long size
-     ^long zeros
-     ^long ones
-     ^boolean reverse])
+(defrecord Bitset [bits size zeros ones reverse])
 
 (defn- init-bits [n]
   (into [] (take (quot (+ n 63) 64) (repeat 0))))
@@ -18,15 +13,15 @@
 (defprotocol IBitset
   (fix [this i])
   (unfix [this i])
-  (flip ^Bitset [this])
-  (all ^boolean [this])
-  (one ^boolean [this])
-  (count-ones ^long [this])
-  (to-string ^String [this]))
+  (flip [this])
+  (all [this])
+  (one [this])
+  (count-ones ^Long [this])
+  (to-string [this]))
 
 (extend-type Bitset
   IBitset
-  (fix ^Bitset [this i]
+  (fix [this i]
     (let [{:keys [ones zeros bits reverse]} this
           slot (quot i 64)
           bit (rem i 64)
@@ -39,7 +34,7 @@
              :ones (inc ones)
              :zeros (dec zeros)
              :bits (assoc bits slot nm))))
-  (unfix ^Bitset [this i]
+  (unfix [this i]
     (let [{:keys [ones zeros bits reverse]} this
           slot (quot i 64)
           bit (rem i 64)
@@ -54,13 +49,13 @@
              :bits (assoc bits slot nm))))
   (flip [this]
     (assoc this :zeros (:ones this) :ones (:zeros this) :reverse (not (:reverse this))))
-  (all ^boolean [this]
+  (all [this]
     (= (:ones this) (:size this)))
-  (one ^boolean [this]
+  (one [this]
     (< 0 (:ones this)))
-  (count-ones ^long [this]
+  (count-ones ^Long [this]
     (:ones this))
-  (to-string ^String [this]
+  (to-string [this]
     (->> (:bits this)
          (reduce (fn [{:keys [bits checked] :as state} b]
                    (let [rflag (:reverse this)
@@ -87,3 +82,14 @@
         (flip)
         (unfix 0)
         (to-string))))
+
+(comment
+  (let [bitset (init-bitset 5)]
+    (-> bitset
+        (fix 3)
+        (fix 1)
+        (flip)
+        (unfix 0)
+        (flip)
+        (unfix 0)
+        (count-ones))))
