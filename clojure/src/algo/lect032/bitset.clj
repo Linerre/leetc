@@ -61,18 +61,20 @@
   (count-ones ^long [this]
     (:ones this))
   (to-string ^String [this]
-    (reduce (fn [{:keys [bits checked] :as state} b]
-              (let [rflag (:reverse this)
-                    size (:size this)]
-                (loop [j 0
-                       cnt checked
-                       bits1 bits]
-                  (let [status (bit-xor (bit-and (bit-shift-right b j) 1) (if rflag 1 0))]
-                    (if (and (< j 64) (< cnt size))
-                      (recur (inc j) (inc cnt) (conj bits1 status))
-                      (assoc state :bits bits1 :checked cnt))))))
-            {:bits [] :checked 0}
-            (:bits this))))
+    (->> (:bits this)
+         (reduce (fn [{:keys [bits checked] :as state} b]
+                   (let [rflag (:reverse this)
+                         size  (:size this)]
+                     (loop [j     0
+                            cnt   checked
+                            bits1 bits]
+                       (let [status (bit-xor (bit-and (bit-shift-right b j) 1) (if rflag 1 0))]
+                         (if (and (< j 64) (< cnt size))
+                           (recur (inc j) (inc cnt) (conj bits1 status))
+                           (assoc state :bits bits1 :checked cnt))))))
+                 {:bits [] :checked 0})
+         (:bits)
+         (string/join))))
 
 
 (comment
