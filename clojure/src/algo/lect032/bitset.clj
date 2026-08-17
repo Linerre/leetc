@@ -49,11 +49,11 @@
                (when (not= 0 (bit-and ts mask)) (bit-clear ts bit))
                (when (= 0 (bit-and ts mask)) (bit-set ts bit)))]
       (assoc this
-             :ones (inc ones)
-             :zeros (dec zeros)
+             :ones (dec ones)
+             :zeros (inc zeros)
              :bits (assoc bits slot nm))))
   (flip [this]
-    (assoc this :zeros (:ones this) :ones (:zeros this) :reverse true))
+    (assoc this :zeros (:ones this) :ones (:zeros this) :reverse (not (:reverse this))))
   (all ^boolean [this]
     (= (:ones this) (:size this)))
   (one ^boolean [this]
@@ -82,4 +82,8 @@
     (-> bitset
         (fix 3)
         (fix 1)
+        (flip)
+        (unfix 0)
+        (flip)
+        (unfix 0)
         (to-string))))
