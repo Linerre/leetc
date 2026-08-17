@@ -81,7 +81,10 @@ export class Bitset {
             number = this._set[k];
             for (let j = 0; j < 32 && i < this.size; j++, i++) {
                 // status represents each bit (1 or 0)
+                // console.log('j=', j);
+                // console.log('i=', i);
                 status = (number >> j) & 1;
+                // console.log('status=', status);
                 status ^= this.reverse ? 1 : 0;
                 str += (status).toString();
             }

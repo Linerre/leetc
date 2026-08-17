@@ -1,4 +1,5 @@
-(ns bitset)
+(ns bitset
+  (:require [clojure.string :as string]))
 
 (defrecord Bitset
     [^longs bits
@@ -14,26 +15,73 @@
   (map->Bitset {:bits (init-bits n) :size n :zeros n :ones 0 :reverse false}))
 
 
-;; // void fix(int i) : 将下标i的位上的值更新为1
-;; // void unfix(int i) : 将下标i的位上的值更新为0
-;; // void flip() : 翻转所有位的值
-;; // boolean all() : 是否所有位都是1
-;; // boolean one() : 是否至少有一位是1
-;; // int count() : 返回所有位中1的数量
-;; // String toString() : 返回所有位的状态
 (defprotocol IBitset
   (fix [this i])
   (unfix [this i])
-  (flip [this])
+  (flip ^Bitset [this])
   (all ^boolean [this])
   (one ^boolean [this])
   (count-ones ^long [this])
   (to-string ^String [this]))
 
+(extend-type Bitset
+  IBitset
+  (fix ^Bitset [this i]
+    (let [{:keys [ones zeros bits reverse]} this
+          slot (quot i 64)
+          bit (rem i 64)
+          ts  (get bits slot)           ; target slot number
+          mask (bit-shift-left 1 bit)
+          nm (if (not reverse)          ; new bitmap at slot
+               (when (= 0 (bit-and ts mask)) (bit-set ts bit))
+               (when (not= 0 (bit-and ts mask)) (bit-clear ts bit)))]
+      (assoc this
+             :ones (inc ones)
+             :zeros (dec zeros)
+             :bits (assoc bits slot nm))))
+  (unfix ^Bitset [this i]
+    (let [{:keys [ones zeros bits reverse]} this
+          slot (quot i 64)
+          bit (rem i 64)
+          ts  (get bits slot)           ; target slot number
+          mask (bit-shift-left 1 bit)
+          nm (if (not reverse)          ; new bitmap at slot
+               (when (not= 0 (bit-and ts mask)) (bit-clear ts bit))
+               (when (= 0 (bit-and ts mask)) (bit-set ts bit)))]
+      (assoc this
+             :ones (inc ones)
+             :zeros (dec zeros)
+             :bits (assoc bits slot nm))))
+  (flip [this]
+    (assoc this :zeros (:ones this) :ones (:zeros this) :reverse true))
+  (all ^boolean [this]
+    (= (:ones this) (:size this)))
+  (one ^boolean [this]
+    (< 0 (:ones this)))
+  (count-ones ^long [this]
+    (:ones this))
+  (to-string ^String [this]
+    (reduce (fn [{:keys [bits checked] :as state} b]
+              (let [rflag (:reverse this)
+                    size (:size this)]
+                (loop [j 0
+                       cnt checked
+                       bits1 bits]
+                  (let [status (bit-xor (bit-and (bit-shift-right b j) 1) (if rflag 1 0))]
+                    (println "n=" j)
+                    (println "cnt=" cnt)
+                    (println "target bit=" (bit-and (bit-shift-right b j) 1))
+                    (println "status=" status)
+                    (if (and (< j 64) (< cnt size))
+                      (recur (inc j) (inc cnt) (conj bits1 status))
+                      (assoc state :bits bits1 :checked cnt))))))
+            {:bits [] :checked 0}
+            (:bits this))))
 
 
-
-
-
-
-(comment (init-bitset 5))
+(comment
+  (let [bitset (init-bitset 5)]
+    (-> bitset
+        (fix 3)
+        (fix 1)
+        (to-string))))
