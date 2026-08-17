@@ -11,5 +11,10 @@
 -
 - 025: Heap and heap sort
   + [Clojure](./clojure/src/algo/lect025/heap_sort.clj)
-  + [Rust](./rusty/src/lect025.rs)
   + [TypeScript](./typescript/src/lect025/main.ts)
+- 028: Radix sort
+  + [Clojure](./clojure/src/algo/lect028/radix_sort.clj)
+  + [TypeScript](./typescript/src/lect028/main.ts)
+- 032: Bitset/Bitmap
+  + [Clojure](./clojure/src/algo/lect032/bitset.clj)
+  + [TypeScript](./typescript/src/lect032/main.ts)

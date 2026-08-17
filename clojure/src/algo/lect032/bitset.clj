@@ -68,10 +68,6 @@
                        cnt checked
                        bits1 bits]
                   (let [status (bit-xor (bit-and (bit-shift-right b j) 1) (if rflag 1 0))]
-                    (println "n=" j)
-                    (println "cnt=" cnt)
-                    (println "target bit=" (bit-and (bit-shift-right b j) 1))
-                    (println "status=" status)
                     (if (and (< j 64) (< cnt size))
                       (recur (inc j) (inc cnt) (conj bits1 status))
                       (assoc state :bits bits1 :checked cnt))))))
