@@ -17,3 +17,8 @@
 - 032: Bitset/Bitmap
   + [Clojure](./clojure/src/algo/lect032/bitset.clj)
   + [TypeScript](./typescript/src/lect032/main.ts)
+- 033: Bitwise operation for add, sub, multiply and divide
+  + [Clojure](./clojure/src/algo/lect033/bit_ops.clj)
+  + [TypeScript](./typescript/src/lect033/main.ts)
+- 034: Common linked list problems
+  + [TypeScript](./typescript/src/lect032/main.ts)
