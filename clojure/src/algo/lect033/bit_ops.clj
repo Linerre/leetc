@@ -41,3 +41,27 @@
         (int quot)))))
 
 (comment (div 1024 2))
+
+(defn divide
+  "Implement division without using arithmatic operations. The number
+  range is strictly limited within [-2^31, 2^31-1] (inclusive)."
+  [dividend divisor]
+  (let [a (int dividend)
+        b (int divisor)]
+    (cond
+      (and (= a MIN) (= b MIN)) 1
+      (and (not= a MIN) (not= b MIN)) (div a b)
+      (= b MIN) 0
+      (= b (neg 1)) MAX
+      ;; (and (= a MIN), (not= b MIN), (not= b (neg 1)))
+      :else
+      (let [a' (add a (if (< 0 b) b (neg b)))
+            q (div a' b)
+            offset (if (< 0 b) (neg 1) (int 1))]
+        (add q offset)))))
+
+(comment (divide MIN MIN))
+(comment (divide MIN MAX))
+(comment (divide 321 MIN))
+(comment (divide MAX (int -1)))
+(comment (divide 333 111))
