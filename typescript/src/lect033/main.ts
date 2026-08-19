@@ -13,7 +13,16 @@ export function sub(a: number, b: number): number {
 }
 
 export function multi(a: number, b: number): number {
-    return 0;
+    let prod = 0;
+    // zero-fill shift b right until it becomes 0
+    while (b !== 0) {
+        if ((b & 1) !== 0) {
+            prod = add(prod, a);
+        }
+        a = a << 1;
+        b = b >>> 1;
+    }
+    return prod;
 }
 
 export function div(a: number, b: number): number {

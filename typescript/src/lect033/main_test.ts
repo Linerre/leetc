@@ -12,3 +12,9 @@ Deno.test('Test bitwise subtraction', () => {
     const b = 200;
     assertEquals(sub(a,b), 233);
 })
+
+Deno.test('Test bitwise muplitpliaton', () => {
+    const a = 4;
+    const b = 25;
+    assertEquals(multi(a,b), 100);
+})
