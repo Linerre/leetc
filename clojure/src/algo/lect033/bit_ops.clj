@@ -1,10 +1,6 @@
 (ns bit-ops)
 
-(def MIN (int -2147483648))
-(def MAX (int 2147483647))
-
 (defn add [a b]
-
   (loop [sum 0
          a'  (int a)
          b'  (int b)]
@@ -41,6 +37,9 @@
         (int quot)))))
 
 (comment (div 1024 2))
+
+(def MIN (int -2147483648))
+(def MAX (int 2147483647))
 
 (defn divide
   "Implement division without using arithmatic operations. The number
