@@ -26,7 +26,16 @@ export function multi(a: number, b: number): number {
 }
 
 export function div(a: number, b: number): number {
-    return 0;
+    let x = a < 0 ? neg(a) : a;
+    let y = b < 0 ? neg(b) : b;
+    let quot = 0;
+    for (let i = 30; i >= 0; i = sub(i, 1)) {
+        if ((x >> i) >= y) {
+            quot = quot | (1 << i);
+            x = sub(x, y << i);
+        }
+    }
+    return a < 0 || b < 0 ? neg(quot) : quot;
 }
 
 function neg(n: number): number {

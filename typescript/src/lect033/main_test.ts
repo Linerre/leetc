@@ -18,3 +18,9 @@ Deno.test('Test bitwise muplitpliaton', () => {
     const b = 25;
     assertEquals(multi(a,b), 100);
 })
+
+Deno.test('Test bitwise div1', () => {
+    const a = 25;
+    const b = 4;
+    assertEquals(div(a,b), 6);
+})
