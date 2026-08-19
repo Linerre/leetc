@@ -25,6 +25,7 @@ export function multi(a: number, b: number): number {
     return prod;
 }
 
+// a and b must not be the minumum integer
 export function div(a: number, b: number): number {
     let x = a < 0 ? neg(a) : a;
     let y = b < 0 ? neg(b) : b;
@@ -35,7 +36,7 @@ export function div(a: number, b: number): number {
             x = sub(x, y << i);
         }
     }
-    return a < 0 || b < 0 ? neg(quot) : quot;
+    return (a < 0 && 0 < b) || (b < 0 && 0 < a) ? neg(quot) : quot;
 }
 
 function neg(n: number): number {

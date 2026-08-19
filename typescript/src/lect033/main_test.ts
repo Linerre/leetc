@@ -24,3 +24,10 @@ Deno.test('Test bitwise div1', () => {
     const b = 4;
     assertEquals(div(a,b), 6);
 })
+
+
+Deno.test('Test bitwise div2', () => {
+    const a = -10;
+    const b = 2;
+    assertEquals(div(a,b), -5);
+})
