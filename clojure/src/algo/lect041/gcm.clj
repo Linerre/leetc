@@ -1,4 +1,4 @@
-(ns algo.lec041.gcm)
+(ns algo.lect041.gcm)
 
 (defn gcd [a b]
   (if (zero? b)

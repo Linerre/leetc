@@ -1,4 +1,4 @@
-(ns bit-ops)
+(ns algo.lect033.bit-ops)
 
 (defn add [a b]
   (loop [sum 0

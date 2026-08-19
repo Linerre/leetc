@@ -1,4 +1,4 @@
-(ns bitset
+(ns algo.lect032.bitset
   (:require [clojure.string :as string]))
 
 (defrecord Bitset [bits size zeros ones reverse])

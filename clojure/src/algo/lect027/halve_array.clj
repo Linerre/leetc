@@ -1,4 +1,4 @@
-(ns halve-array)
+(ns algo.lect027.halve-array)
 
 (defn halve-array [v]
   (let [v20 (mapv #(bit-shift-left % 20) v)
