@@ -1,5 +1,5 @@
 import { assertEquals } from 'jsr:@std/assert';
-import { add, sub, multi, div } from './main.ts';
+import { add, sub, multi, div, divide } from './main.ts';
 
 Deno.test('Test bitwise addition', () => {
     const a = 110;
@@ -30,4 +30,10 @@ Deno.test('Test bitwise div2', () => {
     const a = -10;
     const b = 2;
     assertEquals(div(a,b), -5);
+})
+
+Deno.test('Test bitwise div3', () => {
+    const a = -Math.pow(2, 31);
+    const b = Math.pow(2, 20);
+    assertEquals(divide(a,b), -Math.pow(2,11));
 })
