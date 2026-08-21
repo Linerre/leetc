@@ -8,7 +8,7 @@
 ;; until its parent is larger than it or it becomes the root of the entire tree
 (defn heap-insert
   "Maintain a heap structure where each substree has the largest number at top.
-  Return the array that represents a large-root heap"
+  Return the array that represents a max heap"
   [nums i]
   (loop [heap nums
          ii i]
