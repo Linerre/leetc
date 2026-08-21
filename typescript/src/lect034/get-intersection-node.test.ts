@@ -2,7 +2,7 @@ import { assert, assertFalse, assertExists, assertEquals, assertNotEquals  } fro
 import {
     ListNode,
     getIntersectionNode,
-} from './main.ts';
+} from './get-intersection-node.ts';
 
 /**
  * A navie, stupid implementation that only updates head's next in each loop
