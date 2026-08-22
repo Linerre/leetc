@@ -9,17 +9,17 @@
 
 ## Index
 - 025: Heap and heap sort
-  + [Clojure](./clojure/src/algo/lect025/heap_sort.clj)
-  + [TypeScript](./typescript/src/lect025/main.ts)
+[Clojure](./clojure/src/algo/lect025/heap_sort.clj)
+[TypeScript](./typescript/src/lect025/main.ts)
 - 028: Radix sort
-  + [Clojure](./clojure/src/algo/lect028/radix_sort.clj)
-  + [TypeScript](./typescript/src/lect028/main.ts)
+[Clojure](./clojure/src/algo/lect028/radix_sort.clj)
+[TypeScript](./typescript/src/lect028/main.ts)
 - 032: Bitset/Bitmap
-  + [Clojure](./clojure/src/algo/lect032/bitset.clj)
-  + [TypeScript](./typescript/src/lect032/main.ts)
+[Clojure](./clojure/src/algo/lect032/bitset.clj)
+[TypeScript](./typescript/src/lect032/main.ts)
 - 033: Bitwise operation for add, sub, multiply and divide
-  + [Clojure](./clojure/src/algo/lect033/bit_ops.clj)
-  + [TypeScript](./typescript/src/lect033/main.ts)
+[Clojure](./clojure/src/algo/lect033/bit_ops.clj)
+[TypeScript]( ./typescript/src/lect033/main.ts)
 - 034: Common linked list problems
-  + [TypeScript](./typescript/src/lect034)
-  + [Clojure](https://linerre.github.io/2025/09/18/linked-list-in-clojure-breif.html)
+[Clojure](https://linerre.github.io/2025/09/18/linked-list-in-clojure-breif.html)
+[TypeScript](./typescript/src/lect034)
