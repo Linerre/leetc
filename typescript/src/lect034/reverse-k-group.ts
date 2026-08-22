@@ -1,17 +1,10 @@
-/**
- * Definition for singly-linked list.
- */
-export class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val===undefined ? 0 : val)
-        this.next = (next===undefined ? null : next)
-    }
-}
+import { ListNode } from './util.ts';
 
-function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
-    let start = head;
+// Hard 25: https://leetcode.cn/problems/reverse-nodes-in-k-group/description/
+export function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
+    if (head === null) return null;
+
+    let start = head;           // start narrowed to ListNode
     let end = groupEnd(start, k);
     // Fewer than k nodes, no reverse
     if (end === null) return head;
@@ -35,10 +28,11 @@ function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
 }
 
 // Find the k-group end with start node `start`
-function groupEnd(start: ListNode, k: number): ListNode {
-    let s = start;
+function groupEnd(start: ListNode, k: number): ListNode | null {
+    let s: ListNode | null = start;
     // start with s, move k - 1 times
-    while(k - 1 > 0 && s !== null) {
+    // s will never ever be null as k <= n (total number of nodes in the list)
+    while(k - 1 > 0 && s) {
         s = s.next;
         k--;
     }
@@ -52,7 +46,8 @@ function reverse(start: ListNode, end: ListNode): void {
     // Remember the next of old end
     const rest = end.next;
     let cur: ListNode | null = start;
-    let prev, next: ListNode | null = null;
+    let prev: ListNode | null = null;
+    let next: ListNode | null = null;
     while (cur && cur !== rest ) {
         next = cur!.next;
         // In the first loop, start/a next will become null
