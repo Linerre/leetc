@@ -1,14 +1,6 @@
+import { ListNode } from './util.ts';
 
 // Simple 160: https://leetcode.cn/problems/intersection-of-two-linked-lists/
-export class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val===undefined ? 0 : val)
-        this.next = (next===undefined ? null : next)
-    }
-}
-
 export function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
     if (headA == null || headB == null) return null;
 
