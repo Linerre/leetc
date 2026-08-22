@@ -21,4 +21,5 @@
   + [Clojure](./clojure/src/algo/lect033/bit_ops.clj)
   + [TypeScript](./typescript/src/lect033/main.ts)
 - 034: Common linked list problems
-  + [TypeScript](./typescript/src/lect032/main.ts)
+  + [TypeScript](./typescript/src/lect034)
+  + [Clojure](https://linerre.github.io/2025/09/18/linked-list-in-clojure-breif.html)
