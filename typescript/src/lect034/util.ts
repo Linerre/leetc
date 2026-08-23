@@ -12,6 +12,22 @@ export class ListNode {
 }
 
 /**
+ * Definition for _Node.
+ */
+export class _Node {
+    val: number
+    next: _Node | null
+    random: _Node | null
+
+    constructor(val?: number, next?: _Node, random?: _Node) {
+        this.val = (val===undefined ? 0 : val)
+        this.next = (next===undefined ? null : next)
+        this.random = (random===undefined ? null : random)
+    }
+}
+
+
+/**
  * A navie, stupid implementation that only updates head's next in each loop
  * function makeListFromArray(nums: number[]): ListNode | null {
  *     const head =  new ListNode(0, null);
@@ -40,6 +56,47 @@ export function makeListFromArray(nums: number[]): ListNode | null {
         }
         h.next = new ListNode(nums[i], null);
         h = h.next;
+    }
+    return head;
+}
+
+// [val, node_index]
+export type NodePairs = [number, number | null][];
+export function makeListWithRandomFromArray(pairs: NodePairs): _Node | null {
+    if (pairs.length < 1) return null;
+
+    const head = new _Node(pairs[0][0]);
+    let prev: _Node = head;
+    // create the linked-list without random pointers
+    for (let i = 1; i < pairs.length && prev; i++) {
+        prev.next = new _Node(pairs[i][0]);
+        prev = prev.next;
+    }
+
+    // set up random pointer for each node in the list
+    let h: _Node | null = head;
+    for (let i = 0; i < pairs.length; i++) {
+        const [val, randome_index] = pairs[i];
+        // find current node
+        let cnt = 0;
+        let cur: _Node | null = head;
+        while (cur !== null && cnt < i) {
+            cur = cur.next;
+            cnt++;
+        }
+
+        // find random node
+        cnt = 0;
+        if (typeof randome_index === 'number') {
+            let random: _Node | null = head;
+            while (random !== null && cnt < randome_index) {
+                cnt++;
+                random = random.next;
+            }
+
+            // set up random for cur
+            if (cur) cur.random = random;
+        }
     }
     return head;
 }
@@ -102,4 +159,30 @@ export function printList(head: ListNode | null): number[] {
         head = head.next;
     }
     return vals;
+}
+
+export function printListWithRandom(head: _Node | null): NodePairs {
+    if (!head) return [];
+    const pairs: NodePairs = [];
+    let index = 0;
+    let cur: _Node | null = head;
+    let h: _Node | null = head;
+    while(cur) {
+        const random = cur.random;
+        if (random) {
+            while(h) {
+                if (random.val === h.val) break;
+                index++;
+                if (h) h = h.next;
+            }
+            // console.log([cur.val, index])
+            pairs.push([cur.val, index]);
+        } else {
+            pairs.push([cur.val, null]);
+        }
+        index = 0;
+        h = head;
+        if (cur) cur = cur.next;
+    }
+    return pairs;
 }
