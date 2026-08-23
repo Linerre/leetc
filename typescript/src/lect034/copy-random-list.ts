@@ -1,5 +1,11 @@
 import { _Node } from './util.ts';
 
+/**
+ * A simpler solution would be using a Record<old, new>,
+ * for each new, you can find the old and get its random.
+ * But that would require extra space.
+ */
+
 // Medium 138: https://leetcode.cn/problems/copy-list-with-random-pointer/
 export function copyRandomList(head: _Node | null): _Node | null {
     if (head === null) return null;
