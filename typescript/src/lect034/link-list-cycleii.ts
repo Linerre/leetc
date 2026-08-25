@@ -5,7 +5,7 @@ import { ListNode } from './util.ts';
  * The first duplicate reference to be stored is the entry node.
  * That will require extra space O(n).
  */
-function detectCycle(head: ListNode | null): ListNode | null {
+export function detectCycle(head: ListNode | null): ListNode | null {
     if (head === null || head.next === null || head.next.next === null)
         return null;
 

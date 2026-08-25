@@ -118,21 +118,27 @@ export function makeListFromArrayWithRing(vals: number[], pos?: number): ListNod
     // impossible to have a ring in the list
     if (vals.length < 2) return head;
 
-    if (typeof pos === 'number' && pos > 0) {
+    if (typeof pos === 'number' && pos >= 0) {
         let cnt = 0;
-        let t: ListNode | null = null;
+        let t: ListNode | null = head;
         h = head;
-        while (cnt < pos && h) {
-            cnt++;
-            h = h.next;
-        }
+
         // find tail
         t = h;
         while (t && t.next) {
             t = t.next;
         }
-        // connect tail's next to h to create the ring
-        t!.next = h;
+
+        if (pos === 0) {
+            t!.next = head;
+        } else {
+            while (cnt < pos && h) {
+                cnt++;
+                h = h.next;
+            }
+            // connect tail's next to h to create the ring
+            t!.next = h;
+        }
     }
     return head;
 }
