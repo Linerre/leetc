@@ -101,6 +101,42 @@ export function makeListWithRandomFromArray(pairs: NodePairs): _Node | null {
     return head;
 }
 
+export function makeListFromArrayWithRing(vals: number[], pos?: number): ListNode | null {
+    if (vals.length < 1) return null;
+
+    let head = new ListNode(0, null);
+    let h: ListNode | null  = head;
+    for (let i = 0; i < vals.length; i++) {
+        if (i === 0) {
+            head.val = vals[i];
+            continue;
+        }
+        h.next = new ListNode(vals[i], null);
+        h = h.next;
+    }
+
+    // impossible to have a ring in the list
+    if (vals.length < 2) return head;
+
+    if (typeof pos === 'number' && pos > 0) {
+        let cnt = 0;
+        let t: ListNode | null = null;
+        h = head;
+        while (cnt < pos && h) {
+            cnt++;
+            h = h.next;
+        }
+        // find tail
+        t = h;
+        while (t && t.next) {
+            t = t.next;
+        }
+        // connect tail's next to h to create the ring
+        t!.next = h;
+    }
+    return head;
+}
+
 export function intersect(
     headA: ListNode | null,
     headB: ListNode | null,
