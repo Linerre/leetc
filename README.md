@@ -23,3 +23,6 @@
 - 034: Common linked list problems
 [Clojure](https://linerre.github.io/2025/09/18/linked-list-in-clojure-breif.html)
 [TypeScript](./typescript/src/lect034)
+- 035: Common data structure problems
+[Clojure](./clojure/src/algo/lect035)
+[TypeScript](./typescript/src/lect035)

@@ -22,3 +22,17 @@ Deno.test({
         assertEquals(map.get(2), -1);
     }
 });
+
+Deno.test({
+    name: 'SetAllMap test',
+    timeout: 5000,
+    fn: () => {
+        const m = new SetAllMap();
+        m.put(5, 17);
+        m.put(6, 100);
+        m.setAll(9);
+        assertEquals(m.get(5), 9);
+        m.put(19, 54);
+        assertEquals(m.get(19), 54);
+    }
+});
