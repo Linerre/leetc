@@ -1,6 +1,7 @@
 import { ListNode, printNode } from './util.ts';
 
 /**
+ * Medium 148: https://leetcode.cn/problems/sort-list/description/
  * Time O(n*logn), space O(1), stable
  * For a singly-linked list, a few common patterns as follows
  * node.next = someNode is to link two nodes
@@ -82,7 +83,7 @@ function merge(
     l2: ListNode | null,
     r2: ListNode | null
 ): [ListNode | null, ListNode | null] {
-    let prev: ListNode | null = null;
+    let cur: ListNode | null = null;
     let start: ListNode | null = null;
     let end: ListNode | null = null;
     // Start with the node with the smallest value in both left and
@@ -90,36 +91,37 @@ function merge(
     // with left part to maintain stability.
     if (l1 && l2 && l1.val <= l2.val) {
         start = l1;
-        prev = l1;
+        cur = l1;
         l1 = l1.next;
     } else if (l1 && l2) {
         start = l2;
-        prev = l2;
+        cur = l2;
         l2 = l2.next;
     }
 
+    // The loop connects nodes in asceding order by moving cur forward
+    // from left to right
     while (l1 && l2) {
-        // keep moving prev forward (from left to right)
         if (l1.val <= l2.val) {
-            prev!.next = l1;
-            prev = l1;
+            cur!.next = l1;
+            cur = l1;
             l1 = l1.next;
         } else {
-            prev!.next = l2;
-            prev = l2;
+            cur!.next = l2;
+            cur = l2;
             l2 = l2.next;
         }
     }
-    // if l1 arrives at r1 and l1.val <= l2.val still holds, l1 now
-    // points to null and prev.next points to l2.  if l1 remains
-    // non-null after the above while loop, that indicates at some
-    // point, l1...r1 are all larger than l2...r2 from that point
-    // foward. Then prev.next points to l1 and end points to r1.
+    // if l1 arrives at r1 and l1.val <= l2.val still holds, l1->
+    // null, cur->l1, cur.next->l2. If l1 remains non-null after the
+    // above while loop, that indicates at some point, l1...r1 are all
+    // larger than l2...r2 from that point foward. Then cur.next
+    // points to l1 and end points to r1.
     if (l1) {
-        prev!.next = l1;
+        cur!.next = l1;
         end = r1;
     } else {
-        prev!.next = l2;
+        cur!.next = l2;
         end = r2;
     }
 
