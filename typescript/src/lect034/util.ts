@@ -228,3 +228,12 @@ export function printListWithRandom(head: _Node | null): NodePairs {
     }
     return pairs;
 }
+
+export function printNode(node: ListNode | null): void {
+    console.group();
+    console.log('----------------');
+    if (node) console.log('node.val=', node.val);
+    else console.log(null);
+    console.log('----------------');
+    console.groupEnd();
+}
