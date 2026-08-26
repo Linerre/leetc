@@ -61,5 +61,5 @@ Deno.test('Test getIntersectionNode 3', () => {
     assertFalse(intersect(hA,hB,skipA,skipB));
     const intersection = getIntersectionNode(hA, hB);
     // console.log(intersection);
-    assert(intersection === null, 'Expected intersection to be null but got non-null value');
+    assertFalse(intersection, 'Expected intersection to be null but got non-null value');
 })

@@ -33,7 +33,7 @@ Deno.test({
 });
 
 Deno.test({
-    name: 'Test sortList 2',
+    name: 'Test sortList 3',
     timeout: 3000,
     fn: () => {
         const input: number[] = [];
