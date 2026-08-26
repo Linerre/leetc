@@ -193,7 +193,7 @@ export function skipToNode(head: ListNode | null, skip: number): number | null {
     return a.val;
 }
 
-export function printList(head: ListNode | null): number[] {
+export function listToArray(head: ListNode | null): number[] {
     if (!head) return [];
     const vals: number[] = [];
     while(head) {
