@@ -11,7 +11,7 @@ export class SetAllMap {
             const value: TimestampedValue | undefined = this.map.get(k);
             if (value) {
                 value[0] = v;
-                value[1]++;
+                value[1] = this.cnt++;
             }
         } else {
             this.map.set(k, [v, this.cnt++]);
