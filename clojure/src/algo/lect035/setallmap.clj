@@ -12,7 +12,7 @@
   IMap
   (mput [this k v]
     (-> this
-        (assoc k [v (:cnt this)])
+        (assoc-in [:map k] [v (:cnt this)])
         (update this :cnt inc)))
 
   (mset-all [this v]
@@ -23,8 +23,8 @@
 
   (mget [this k]
     (cond
-      (nil? (get this k)) -1
-      (> (peek (get this k)) (:set-all-time this)) (first (get this k))
+      (nil? (get-in this [:map k] k)) -1
+      (> (peek (get-in this [:map k] k)) (:set-all-time this)) (first (get-in this [:map k] k))
       :else (:set-all-value this))))
 
 
@@ -34,5 +34,4 @@
         (mput 5 17)
         (mput 6 100)
         (mset-all 9)
-        (mput 19 54)
-        (mget 19))))
+        (mget 5))))
