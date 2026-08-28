@@ -1,4 +1,4 @@
-import { assert, assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert/equals';
 import { SetAllMap } from './setallmap.ts';
 
 // see: https://www.nowcoder.com/practice/7c4559f138e74ceb9ba57d76fd169967
