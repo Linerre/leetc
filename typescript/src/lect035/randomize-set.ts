@@ -1,3 +1,4 @@
+// Medium 380: https://leetcode.cn/problems/insert-delete-getrandom-o1/description/
 export class RandomizedSet {
   private map: Map<number, number>;
   private arr: number[];
