@@ -1,3 +1,4 @@
+// Hard 381: https://leetcode.cn/problems/insert-delete-getrandom-o1-duplicates-allowed/description/
 export class RandomizedCollection {
   private map: Map<number, Set<number>>;
   private arr: number[];
@@ -8,7 +9,6 @@ export class RandomizedCollection {
   }
 
   insert(val: number): boolean {
-    if (this.map.has(val)) return false;
     let set: Set<number> | undefined = this.map.get(val);
     if (set === undefined) {
       set = new Set([this.arr.length]);
