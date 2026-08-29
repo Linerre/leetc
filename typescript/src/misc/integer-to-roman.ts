@@ -6,6 +6,7 @@ export function intToRoman(num: number): string {
   let offset = 1000;
   while (num != 0) {
     let digit = Math.floor(num / offset);
+    // switch true also works but I want to rely on fall-through
     switch (offset) {
       case 1000:
         switch (digit) {
@@ -15,7 +16,7 @@ export function intToRoman(num: number): string {
           case 2:
           case 3:
             while (digit !== 0) {
-              roman = 'M'.concat(roman);
+              roman = roman.concat('M');
               digit--;
             }
             break;
@@ -25,7 +26,6 @@ export function intToRoman(num: number): string {
         break;
 
       case 100:
-        // switch true also works but I want to rely on fall-through
         switch (digit) {
           case 9:
             roman = roman.concat('CM');
