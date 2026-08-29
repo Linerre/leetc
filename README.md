@@ -1,7 +1,7 @@
 # Algorithms and Leetcode exercises
 
 ## Main Resources
-1. Repo: https://github.com/algorithmzuo/algorithm-journey
+1. Code: https://github.com/algorithmzuo/algorithm-journey
 2. Lectures
     - Bilibili: https://space.bilibili.com/8888480/lists/3509640?type=series
     - Youtube: https://www.youtube.com/@algorithmzuo
@@ -26,3 +26,10 @@
 - 035: Common data structure problems
 [Clojure](./clojure/src/algo/lect035)
 [TypeScript](./typescript/src/lect035)
+
+## AI Usage
+This repo uses AI/LLM (Claude, DeepSeek and Kimi) mainly for two purposes:
+1. Debug
+2. Suggest improvements
+
+I tried to collect AI's responses in the corresponding markdown files under the [docs](./docs) directory.
