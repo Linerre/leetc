@@ -1,3 +1,4 @@
+// Hard 432: https://leetcode.cn/problems/all-oone-data-structure/description/
 export class Bucket {
   set: Set<string>;
   cnt: number;
