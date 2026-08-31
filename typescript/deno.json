@@ -1,6 +1,7 @@
 {
   "imports": {
     "@datastructures-js/priority-queue": "npm:@datastructures-js/priority-queue@6.3.5",
+    "@datastructures-js/queue": "npm:@datastructures-js/queue@4.3.0",
     "@std/assert": "jsr:@std/assert@1"
   },
   "fmt": {
