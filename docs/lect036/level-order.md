@@ -98,3 +98,55 @@ Because you only enqueue *real* nodes (nulls are never enqueued), null nodes cor
 This queue-based approach is essentially the inverse of how you'd *serialize* a tree into this format (also BFS), which is why it's the standard.
 
 Want me to walk through implementing this in TypeScript step by step, or would you like to try coding it yourself first with this algorithm in mind?
+
+## Array length and content
+Regarding Typescript or Javascript array, I have a question.
+Suppose I know the input will not exceed 100, so I create an array like below
+
+```typescript
+const arr = Array<number>();
+```
+
+Then I pushed 10 or 20 numbers into the array and compare it with the expected output
+
+```
+assertEquals(arr, output);
+```
+
+This works, but my confusion is why `arr` is not `[n1,n2,...n10, undefined, undefined, ... undefined]` and equals to the output?
+
+## Claude response
+Good question — the confusion comes from what `Array<number>()` actually does at runtime.
+
+**The `<number>` part is a TypeScript generic, not a size.** It only tells the type checker "this will be an array of numbers." It's erased when compiled to JavaScript and has zero effect on how the array is constructed or how many elements it has.
+
+At runtime, `Array<number>()` is just:
+
+```javascript
+new Array()
+```
+
+Since you passed **no arguments**, this creates an empty array — length `0`. There's no "100 slots" happening anywhere. Your knowledge that "input won't exceed 100" isn't encoded in the code at all; it's just information in your head (maybe as a comment), not something enforced or allocated.
+
+So the sequence is:
+
+```typescript
+const arr = Array<number>(); // [] , length 0
+arr.push(n1); // [n1], length 1
+arr.push(n2); // [n1, n2], length 2
+// ... etc.
+```
+
+Each `push` just appends one element and grows the length by 1. After 10 pushes, `arr` has exactly 10 elements — no trailing `undefined`s — because nothing ever set the length to 100.
+
+**Where the confusion likely comes from:** if you had instead written `Array<number>(100)` (passing `100` as an argument), *that* creates something different — a sparse array with `length === 100` but no actual elements (empty slots, not even `undefined` values, though they behave like `undefined` in many contexts):
+
+```typescript
+const arr2 = Array<number>(100);
+console.log(arr2.length); // 100
+console.log(arr2);        // [ <100 empty items> ]
+```
+
+If you then `push`ed 10 numbers onto *that*, you'd end up with length 110, and comparing it to a 10-element expected output would indeed fail (and would look like trailing empty/undefined slots).
+
+Since you used `Array<number>()` with no argument, you're safe — it behaves exactly like `[]`, and your `assertEquals` comparison works as expected because both sides end up with the same length and same contents.
