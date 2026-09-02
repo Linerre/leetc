@@ -32,7 +32,7 @@ export function levelOrder1(root: TreeNode | null): number[][] {
 const MAXN = 2001;
 export function levelOrder2(root: TreeNode | null): number[][] {
   const queue: TreeNode[] = Array<TreeNode>(MAXN);
-  let levels: number[][] = [];
+  const levels: number[][] = [];
   if (root !== null) {
     // l marks leftmost node and r - 1 marks the rightmost node
     // this line is also equivalent to clearing the queue
@@ -44,7 +44,7 @@ export function levelOrder2(root: TreeNode | null): number[][] {
     // repeat until there is nothing in the queue
     while (l < r) {
       const size = r - l;
-      let level = new Array<number>();
+      const level = new Array<number>();
       // repeat size times
       for (let i = 0; i < size; i++) {
         // 1. take a node from the queue
