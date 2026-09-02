@@ -2,7 +2,7 @@ import { Queue } from '@datastructures-js/queue';
 import { TreeNode } from './util.ts';
 
 // Medium 102: https://leetcode.cn/problems/binary-tree-level-order-traversal/description/
-function levelOrder1(root: TreeNode | null): number[][] {
+export function levelOrder1(root: TreeNode | null): number[][] {
   const ans: number[][] = [];
   if (root !== null) {
     const queue = new Queue<TreeNode>();
@@ -30,7 +30,7 @@ function levelOrder1(root: TreeNode | null): number[][] {
 };
 
 const MAXN = 2001;
-function levelOrder2(root: TreeNode | null): number[][] {
+export function levelOrder2(root: TreeNode | null): number[][] {
   const queue: TreeNode[] = Array<TreeNode>(MAXN);
   let levels: number[][] = [];
   if (root !== null) {
