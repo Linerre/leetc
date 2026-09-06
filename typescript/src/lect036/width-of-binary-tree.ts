@@ -16,26 +16,23 @@ function widthOfBinaryTree(root: TreeNode | null): number {
   // repeat until queue is empty
   while (l < r) {
     const size = r - l;
-    // pop node and its index from both queues
-    const li = indexQuque[l] ?? 0;
-    const ri = indexQuque[r - 1] ?? 0;
-    if (li === 0 || ri === 0) return ans;
-    // width = rightmost non-null node index - leftmost non-null node + 1
-    ans = Math.max(ans, ri - li + 1);
+    const first = indexQuque[l];
+    ans = Math.max(ans, indexQuque[r - 1] - first + 1);
 
-    // put current nodes' children into queue for next loop
     for (let i = 0; i < size; i++) {
-      const n = nodeQueue[l] ?? null;
-      const ni = indexQuque[l++] ?? 0;
-      if (n?.left && ni !== 0) {
-        nodeQueue[r] = n?.left;
+      const n = nodeQueue[l];
+      // re-base to avoid unbounded growth
+      const ni = indexQuque[l++] - first + 1;
+      if (n.left) {
+        nodeQueue[r] = n.left;
         indexQuque[r++] = ni * 2;
       }
-      if (n?.right && ni !== 0) {
-        nodeQueue[r] = n?.right;
+      if (n.right) {
+        nodeQueue[r] = n.right;
         indexQuque[r++] = ni * 2 + 1;
       }
     }
   }
+
   return ans;
 };
