@@ -1,7 +1,8 @@
 import { TreeNode } from './util.ts'; 
 
+// Medium 662: https://leetcode.cn/problems/maximum-width-of-binary-tree/description/
 const MAXN = 3001;
-function widthOfBinaryTree(root: TreeNode | null): number {
+export function widthOfBinaryTree(root: TreeNode | null): number {
   if (root === null) return 0;
   const nodeQueue = new Array<TreeNode>(MAXN);
   const indexQuque = new Array<number>(MAXN);
