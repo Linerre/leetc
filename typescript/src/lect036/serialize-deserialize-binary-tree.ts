@@ -29,19 +29,17 @@ function _ser(node: TreeNode | null, arr: string[]): void {
   }
 }
 
-let CNT = 0;
 /*
  * Decodes your necoded data to tree.
  */
 export function deserialize(data: string): TreeNode | null {
   const vals = data.split(',');
-  CNT = 0;
   return _der(vals);
 };
 
 function _der(vals: string[]): TreeNode | null {
-  const val = vals[CNT++];
-  if (typeof val === 'string' && val === '#') {
+  const val = vals.shift();
+  if (val === undefined || val === '#') {
     return null;
   } else {
     const node = new TreeNode(Number.parseInt(val));
