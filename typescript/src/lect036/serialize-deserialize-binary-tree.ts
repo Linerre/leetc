@@ -12,7 +12,7 @@ import { TreeNode } from './util.ts';
 /*
  * Encodes a tree to a single string.
  */
-export function serialize(root: TreeNode | null): string {
+export function serialize1(root: TreeNode | null): string {
   const ser = Array<string>();
   _ser(root, ser);
   return ser.join();
@@ -32,19 +32,82 @@ function _ser(node: TreeNode | null, arr: string[]): void {
 /*
  * Decodes your necoded data to tree.
  */
-export function deserialize(data: string): TreeNode | null {
+export function deserialize1(data: string): TreeNode | null {
   const vals = data.split(',');
-  return _der(vals);
+  return _des(vals);
 };
 
-function _der(vals: string[]): TreeNode | null {
+function _des(vals: string[]): TreeNode | null {
   const val = vals.shift();
   if (val === undefined || val === '#') {
     return null;
   } else {
     const node = new TreeNode(Number.parseInt(val));
-    node.left = _der(vals);
-    node.right = _der(vals);
+    node.left = _des(vals);
+    node.right = _des(vals);
     return node;
   }
 }
+
+
+/**
+ * This implementation does not rely on recursion
+ */
+export function serialize2(root: TreeNode | null): string {
+  const ser = Array<string>();
+  const queue = Array<TreeNode>(10001);
+
+  if (root) {
+    let l = 0;
+    let r = 0;
+
+    // serialize and push into queue
+    ser.push((root.val).toString());
+    queue[r++] = root;
+
+    // repeat until queue becomes empty (l == r)
+    while (l < r) {
+      const node = queue[l++];
+      if (node && node.left) {
+        ser.push((node.left.val).toString());
+        queue[r++] = node.left;
+      } else {
+        ser.push('#');
+      }
+
+      if (node && node.right) {
+        ser.push((node.right.val).toString());
+        queue[r++] = node.right;
+      } else {
+        ser.push('#');
+      }
+    }
+  }
+  return ser.join();
+}
+
+export function deserialize2(data: string): TreeNode | null {
+  if (data.length === 0) return null;
+  let index = 0;                // for consuming vals
+  let l = 0;                    // for consuming queue
+  let r = 0;
+  const queue = Array<TreeNode>(10001)
+  const vals = data.split(',');
+  const root = generate(vals[index++]);
+  if (root) queue[r++] = root;
+
+  while (l < r) {
+    const node = queue[l++];
+    node.left = generate(vals[index++]);
+    node.right = generate(vals[index++]);
+    if (node.left) queue[r++] = node.left;
+    if (node.right) queue[r++] = node.right;
+  }
+  return root;
+}
+
+function generate(val: string): TreeNode | null {
+  return val === '#' ? null : new TreeNode(Number.parseInt(val));
+}
+
+
