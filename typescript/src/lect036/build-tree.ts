@@ -1,7 +1,7 @@
 import { TreeNode } from './util.ts';
 
 // Medium 105: https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description
-function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
+export function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
   if (
     preorder.length === 0 || inorder.length === 0 ||
     preorder.length !== inorder.length

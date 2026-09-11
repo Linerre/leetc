@@ -38,3 +38,26 @@ export function makeBTreeFromArray(vals: NodeVal[]): TreeNode {
   return root;
 }
 
+export function treeToArray(head: TreeNode | null): NodeVal[] {
+  const arr = Array<NodeVal>();
+  if (head) {
+    const queue = new Queue<TreeNode | null>();
+    queue.enqueue(head);
+    while (!queue.isEmpty()) {
+      const node = queue.dequeue();
+      if (node) {
+        arr.push(node.val);
+        queue.enqueue(node.left);
+        queue.enqueue(node.right);
+      } else {
+        arr.push(null);
+      }
+    }
+  }
+
+  // clean up trailing nulls of leaf nodes
+  while (arr.length > 0 && arr[arr.length - 1] === null) {
+    arr.pop();
+  }
+  return arr;
+}
