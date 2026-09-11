@@ -34,11 +34,18 @@ function build(
   const head = new TreeNode(preo[l1]);
   // one node only
   if (l1 === r1) return head;
+  // find the head index k in inOrder array
   const k = map.get(preo[l1]);
   if (k === undefined) return null;
 
   // find the left and right substrees accordingly
-  head.left = build(preo, l1 + 1, l1 + k - l2, ino, l2, k - 1, map);
-  head.right = build(preo, l1 + k - l2 + 1, r1, ino, k + 1, r2, map);
+  // For preOrder array:
+  // left substree starts at l1 + 1 and ends at k - l2 + l1 
+  // right substree starts at k - l2 + l1 + 1 and ends at r1
+  // For inOrder array:
+  // left substree starts at l2 and ends at k - 1 
+  // right substree starts at k + 1 and ends at r2
+  head.left = build(preo, l1 + 1, k - l2 + l1, ino, l2, k - 1, map);
+  head.right = build(preo, k - l2 + l1 + 1, r1, ino, k + 1, r2, map);
   return head;
 }
