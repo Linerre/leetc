@@ -1,7 +1,7 @@
 import { TreeNode } from './util.ts';
 
 // Medium 958: https://leetcode.cn/problems/check-completeness-of-a-binary-tree/
-function isCompleteTree(root: TreeNode | null): boolean {
+export function isCompleteTree(root: TreeNode | null): boolean {
   // according to problem description, this case is considered true
   if (root === null) return true;
 
