@@ -15,7 +15,10 @@ export class TreeNode {
 
 export type NodeVal = number | null;
 
-export function makeBTreeFromArray(vals: NodeVal[]): TreeNode {
+// Build a tree from an array of numbers or null, in BFS order
+export function makeBTreeFromArray(vals: NodeVal[]): TreeNode | null {
+  if (vals.length === 0) return null;
+
   const queue = new Queue<TreeNode | null>();
   const n = vals.length;
   const root = new TreeNode(vals[0] ?? 0);

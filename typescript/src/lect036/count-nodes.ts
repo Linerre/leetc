@@ -1,7 +1,7 @@
 import { TreeNode } from './util.ts';
 
 // Medium 222: https://leetcode.cn/problems/count-complete-tree-nodes/
-function countNodes(root: TreeNode | null): number {
+export function countNodes(root: TreeNode | null): number {
   if (root === null) return 0;
   // get the entire tree's height
   const h = leftMostLevel(root, 1);
