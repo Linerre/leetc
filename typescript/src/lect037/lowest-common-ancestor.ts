@@ -1,6 +1,6 @@
 import { TreeNode } from '../lect036/util.ts';
 
-function lowestCommonAncestor(
+export function lowestCommonAncestor(
   root: TreeNode | null,
   p: TreeNode | null,
   q: TreeNode | null,
