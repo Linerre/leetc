@@ -1,5 +1,6 @@
 import { TreeNode } from '../lect036/util.ts';
 
+// Medium 236: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/
 export function lowestCommonAncestor(
   root: TreeNode | null,
   p: TreeNode | null,
