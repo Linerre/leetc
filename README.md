@@ -5,6 +5,7 @@
 2. Lectures
     - Bilibili: https://space.bilibili.com/8888480/lists/3509640?type=series
     - Youtube: https://www.youtube.com/@algorithmzuo
+    - Lecturer: https://github.com/algorithmzuo
 3. Book: [Jeff Erickson](https://jeffe.cs.illinois.edu/teaching/algorithms/)
 
 ## Index
@@ -26,6 +27,10 @@
 - 035: Common data structure problems
 [Clojure](./clojure/src/algo/lect035)
 [TypeScript](./typescript/src/lect035)
+- 036: Common binary tree problems I
+[TypeScript](./typescript/src/lect036)
+- 037: Common binary tree problems II
+[TypeScript](./typescript/src/lect037)
 
 ## AI Usage
 This repo uses AI/LLM (Claude, DeepSeek and Kimi) mainly for two purposes:
