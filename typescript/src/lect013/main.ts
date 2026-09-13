@@ -51,9 +51,9 @@ export class Stack {
     _size: number;
 
     constructor(n: number | undefined) {
-        if (!n) this.#stack = Array();
-        else this.#stack = Array(n);
-        this._size = 0;
+      if (!n) this.#stack = [];
+      else this.#stack = Array(n);
+      this._size = 0;
     }
 
     isEmpty(): boolean {
