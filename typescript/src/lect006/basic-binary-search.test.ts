@@ -1,5 +1,5 @@
 import { assertEquals } from '@std/assert';
-import { findNumber } from './find-number.ts';
+import { findNumber } from './basic-binary-search.ts';
 import { findNumberLinear, randomArray } from './util.ts';
 
 Deno.test({
