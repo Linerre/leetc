@@ -1,5 +1,5 @@
 import { assertEquals } from '@std/assert';
-import { findNumber, findLeft, findRight, } from './basic-binary-search.ts';
+import { findNumber, findLeft, findRight, findPeakElement } from './basic-binary-search.ts';
 import {
   findNumberLinear,
   findLeftLinear,
@@ -14,7 +14,7 @@ Deno.test({
     const V = 1000;
     const nums = randomArray();
     const target = Math.floor(Math.random() * V);
-    nums.sort();
+    nums.sort((a, b) => a - b);
     assertEquals(findNumber(nums, target), findNumberLinear(nums, target));
   }
 });
@@ -26,10 +26,10 @@ Deno.test({
     const V = 1000;
     const nums = randomArray();
     const target = Math.floor(Math.random() * V);
-    nums.sort();
+    nums.sort((a, b) => a - b);
     assertEquals(findLeft(nums, target), findLeftLinear(nums, target));
   }
-})
+});
 
 Deno.test({
   name: 'Test findRight',
