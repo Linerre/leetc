@@ -1,5 +1,5 @@
 ## Question
-I have a typescript implementation as follows, but the test sometimes succeed and sometimes fail
+I have a typescript implementation as follows, but the test sometimes succeeded and sometimes failed
 
 ```typescript
 // Find the rightmost number <= target in a sorted array and return its index

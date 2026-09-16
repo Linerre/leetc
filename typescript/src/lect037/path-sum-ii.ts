@@ -1,6 +1,6 @@
 import { TreeNode } from '../lect036/util.ts';
 
-function pathSum(root: TreeNode | null, targetSum: number): number[][] {
+export function pathSum(root: TreeNode | null, targetSum: number): number[][] {
   const ans: number[][] = [];
   if (root) {
     const path: number[] = [];
