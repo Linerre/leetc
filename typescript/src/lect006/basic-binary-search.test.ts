@@ -14,7 +14,7 @@ Deno.test({
     const V = 1000;
     const nums = randomArray();
     const target = Math.floor(Math.random() * V);
-    nums.sort((a, b) => a - b);
+    nums.sort((a, b) => a - b); // numeric sort, not lexicographic
     assertEquals(findNumber(nums, target), findNumberLinear(nums, target));
   }
 });
@@ -38,7 +38,28 @@ Deno.test({
     const V = 1000;
     const nums = randomArray();
     const target = Math.floor(Math.random() * V);
-    nums.sort();
+    nums.sort((a, b) => a - b);
     assertEquals(findRight(nums, target), findRightLinear(nums, target));
+  }
+});
+
+
+Deno.test({
+  name: 'Test findPeakElement 1',
+  timeout: 1000,
+  fn: () => {
+    const nums = [1,2,3,1];
+    const output = 2;
+    assertEquals(findPeakElement(nums), output);
+  }
+});
+
+Deno.test({
+  name: 'Test findPeakElement 2',
+  timeout: 1000,
+  fn: () => {
+    const nums = [1,2,1,3,5,6,4];
+    const output = 5;
+    assertEquals(findPeakElement(nums), output);
   }
 })
