@@ -16,6 +16,9 @@ export function lowestCommonAncestor(
 
   // if p and q can be found in both branches, root must be the common ancestor
   if (l && r) return root;
+  // if p and q cannot be found in either branches, no common ancestor
   if (l === null && r === null) return null;
+  // if only one of p or q can be found, the one found is the common
+  // ancestor (p contains q or the opposite)
   return l ?? r;
 }
