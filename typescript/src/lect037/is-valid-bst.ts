@@ -1,6 +1,7 @@
 import { TreeNode } from '../lect036/util.ts';
 
-function isValidBST(root: TreeNode | null): boolean {
+// Medium 98:  https://leetcode.cn/problems/validate-binary-search-tree/description/
+export function isValidBST(root: TreeNode | null): boolean {
   if (root === null) return true;
 
   let size = 0;
@@ -10,10 +11,14 @@ function isValidBST(root: TreeNode | null): boolean {
 
   while (size > 0 || root) {
     if (root) {
-      // keep moving downward to the leftmost leaf of current node
+      // put entire left edge of current head/root into stack
       stack[size++] = root;
       root = root.left;
     } else {
+      // pop node from stack and compare with previous one
+      // if previous one is null, skip
+      // if previous one is left, current is mid
+      // if previous one is mid, current is right
       root = stack[--size];
       if (prev && root && prev.val >= root.val) return false;
 
@@ -21,6 +26,6 @@ function isValidBST(root: TreeNode | null): boolean {
       root = root.right;
     }
   }
-  
+
   return true;
 };
