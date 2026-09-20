@@ -1,7 +1,7 @@
 import { TreeNode } from '../lect036/util.ts';
 
 // Medium 337: https://leetcode.cn/problems/house-robber-iii/description/
-function rob(root: TreeNode | null): number {
+export function rob(root: TreeNode | null): number {
   const { yes, no } = f(root);
   return Math.max(yes, no);
 };
