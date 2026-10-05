@@ -1,5 +1,5 @@
 // Medium 46: https://leetcode.cn/problems/permutations/description/
-function permute(nums: number[]): number[][] {
+export function permute(nums: number[]): number[][] {
   const ans: number[][] = [];
   f(nums, 0, ans);
   return ans;
