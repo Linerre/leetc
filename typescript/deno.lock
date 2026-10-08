@@ -5,7 +5,8 @@
     "jsr:@std/assert@1": "1.0.19",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "npm:@datastructures-js/priority-queue@6.3.5": "6.3.5",
-    "npm:@datastructures-js/queue@4.3.0": "4.3.0"
+    "npm:@datastructures-js/queue@4.3.0": "4.3.0",
+    "npm:@datastructures-js/stack@3.1.6": "3.1.6"
   },
   "jsr": {
     "@std/assert@1.0.19": {
@@ -30,13 +31,17 @@
     },
     "@datastructures-js/queue@4.3.0": {
       "integrity": "sha512-2RYt1+N4dtdcilwmB+A6j9HT/5MImHSK2UUjBA8WQAHoA2AEJC4YxJSSGhGTOBMyLMKpMiowwTrnB315YgtTrA=="
+    },
+    "@datastructures-js/stack@3.1.6": {
+      "integrity": "sha512-HtArTBadxEK8j/whIuXanzoCj9VPz7BXJOn5n4ktr7K+DtGryrCLERZczbN35WujqEwIjIdVTTbxGoma1qGDuQ=="
     }
   },
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
       "npm:@datastructures-js/priority-queue@6.3.5",
-      "npm:@datastructures-js/queue@4.3.0"
+      "npm:@datastructures-js/queue@4.3.0",
+      "npm:@datastructures-js/stack@3.1.6"
     ]
   }
 }
