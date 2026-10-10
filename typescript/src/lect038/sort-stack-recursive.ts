@@ -1,5 +1,15 @@
 import { Stack } from '@datastructures-js/stack';
 
+export function sort(stack: Stack<number>): void {
+  let d = depth(stack);
+  while (d > 0) {
+    const max = maxItem(stack, d);
+    const k = maxCount(stack, d, max);
+    pushDown(stack, d, max, k);
+    d -= k;
+  }
+}
+
 function depth(stack: Stack<number>): number {
   if (stack.isEmpty()) return 0;
   const num = stack.pop();
