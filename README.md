@@ -33,7 +33,7 @@
 [TypeScript](./typescript/src/lect036)
 - 037: Common binary tree problems II
 [TypeScript](./typescript/src/lect037)
-- 034: Common recursion problems
+- 038: Common recursion problems
 [TypeScript](./typescript/src/lect038)
 
 

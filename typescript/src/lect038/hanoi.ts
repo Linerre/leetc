@@ -15,7 +15,7 @@ function f(pile: number, from: string, to: string, other: string): void {
 
 function main(): void {
   const n = 3;
-  hanoi(3);
+  hanoi(n);
 }
 
 main();
