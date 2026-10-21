@@ -1,5 +1,5 @@
 {
  :deps {org.clojure/clojure  {:mvn/version "1.12.2"}}
  :paths ["src"]
- :jvm-opts ["-Djdk.attach.allowAttachSelf"]
+ :aliases {:nrepl {:jvm-opts ["-Djdk.attach.allowAttachSelf"]}}
 }
