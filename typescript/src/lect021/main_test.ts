@@ -1,4 +1,4 @@
-import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
+import {  assert, assertEquals, assertFalse } from '@std/assert';
 import { sortArray, sortArray2 } from './main.ts';
 
 Deno.test('Test merge sort 1-1', () => {

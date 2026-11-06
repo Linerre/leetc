@@ -1,4 +1,4 @@
-import { assert, assertFalse, assertExists, assertEquals, assertNotEquals  } from 'jsr:@std/assert';
+import { assert, assertFalse, assertExists, assertEquals, assertNotEquals  } from '@std/assert';
 import { getIntersectionNode } from './get-intersection-node.ts';
 import {
     intersect,

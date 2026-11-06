@@ -1,4 +1,4 @@
-import { assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert';
 import { ListNode, mergeKLists } from './mergeKLists.ts';
 
 Deno.test('mergeKLists-1', () => {

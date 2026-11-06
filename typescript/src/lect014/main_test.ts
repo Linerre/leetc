@@ -1,4 +1,4 @@
-import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
+import {  assert, assertEquals, assertFalse } from '@std/assert';
 import { StackQueue, QueueStack  } from './main.ts';
 
 

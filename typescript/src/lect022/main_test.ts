@@ -1,4 +1,4 @@
-import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
+import {  assert, assertEquals, assertFalse } from '@std/assert';
 import { smallSum } from './small-sum.ts';
 import { reversePairs } from './reverse-pairs.ts';
 

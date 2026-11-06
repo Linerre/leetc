@@ -1,4 +1,4 @@
-import { assertExists, assertEquals, assertFalse } from 'jsr:@std/assert';
+import { assertExists, assertEquals, assertFalse } from '@std/assert';
 import { sortList } from './sort-list.ts';
 import { ListNode, makeListFromArray, listToArray } from './util.ts';
 

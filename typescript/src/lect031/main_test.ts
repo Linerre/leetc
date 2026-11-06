@@ -1,4 +1,4 @@
-import { assert, assertFalse } from 'jsr:@std/assert';
+import { assert, assertFalse } from '@std/assert';
 import {
     powerOfTwo,
     powerOfThree,

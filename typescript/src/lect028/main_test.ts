@@ -1,4 +1,4 @@
-import { assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert';
 import { sortArray } from './main.ts';
 
 Deno.test('Radix Srot 1', () => {

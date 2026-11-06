@@ -1,4 +1,4 @@
-import {  assert, assertEquals, assertFalse } from 'jsr:@std/assert';
+import {  assert, assertEquals, assertFalse } from '@std/assert';
 import { CircularDequeu } from './main.ts';
 
 Deno.test('Test circular deque 1', () => {

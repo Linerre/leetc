@@ -1,4 +1,4 @@
-import { assert, assertExists, assertEquals } from 'jsr:@std/assert';
+import { assert, assertExists, assertEquals } from '@std/assert';
 import { reverseKGroup } from './reverse-k-group.ts';
 import { ListNode, makeListFromArray, listToArray } from './util.ts';
 

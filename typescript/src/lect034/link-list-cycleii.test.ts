@@ -1,4 +1,4 @@
-import { assertExists, assertEquals, assertFalse } from 'jsr:@std/assert';
+import { assertExists, assertEquals, assertFalse } from '@std/assert';
 import { detectCycle } from './link-list-cycleii.ts';
 import { ListNode, makeListFromArrayWithRing } from './util.ts';
 

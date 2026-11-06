@@ -1,4 +1,4 @@
-import { assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert';
 import { findKthLargest } from './main.ts';
 
 Deno.test('Test findKthLargest 1', () => {

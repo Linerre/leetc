@@ -1,4 +1,4 @@
-import { assert, assertEquals, assertExists } from 'jsr:@std/assert';
+import { assert, assertEquals, assertExists } from '@std/assert';
 import { copyRandomList } from './copy-random-list.ts';
 import {
     type NodePairs,

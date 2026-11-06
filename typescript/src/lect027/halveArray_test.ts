@@ -1,4 +1,4 @@
-import { assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert';
 import { halveArray1, halveArray2 } from './halveArray.ts';
 
 Deno.test('halveArray-1', () => {

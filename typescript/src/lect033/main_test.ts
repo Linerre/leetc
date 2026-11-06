@@ -1,4 +1,4 @@
-import { assertEquals } from 'jsr:@std/assert';
+import { assertEquals } from '@std/assert';
 import { add, sub, multi, div, divide } from './main.ts';
 
 Deno.test('Test bitwise addition', () => {
