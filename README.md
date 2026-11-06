@@ -35,6 +35,8 @@
 [TypeScript](./typescript/src/lect037)
 - 038: Common recursion problems
 [TypeScript](./typescript/src/lect038)
+- 039: Common embedded-recursion problems
+[TypeScript](./typescript/src/lect039)
 
 
 ## AI Usage
