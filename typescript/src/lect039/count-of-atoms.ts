@@ -1,9 +1,11 @@
 // Hard  726: https://leetcode.cn/problems/number-of-atoms/
 export function countOfAtoms(formula: string): string {
   const [atoms, _] = parse(formula.split(''), 0);
-  let ans = '';
-  atoms.forEach((v,k) => ans = ans.concat(v+k));
-  return ans;
+  // need to sort the key-val pairs in the map
+  const con: string[] = [];
+  atoms.forEach((v,k) => con.push(k + (v > 1 ? v : '')));
+  con.sort();
+  return con.join('');
 }
 
 // In general, there are two types of info to collect:
