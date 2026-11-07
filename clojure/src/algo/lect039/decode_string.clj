@@ -7,10 +7,10 @@
            cnt  0
            p (str)
            c (get s ii)]
-      (println c)
+      ;; (println c)
       (if (and (< ii n) c (not (re-matches #"\]" c)))
         (cond
-          (re-matches #"[a-z][A-Z]" c)
+          (re-matches #"[a-zA-Z]" c)
           (recur (inc ii) cnt (str p c) (get s (inc ii)))
 
           (re-matches #"[0-9]" c)
@@ -18,12 +18,21 @@
 
           ;; left bracket
           :else
-          (let [{:keys [pos, subp]} (parse s (inc ii))]
-            (recur (inc pos) 0 (str p (string/join "" (repeat subp))) (get s (inc pos)))))
+          (let [{:keys [pos, path]} (parse s (inc ii))]
+            (recur (inc pos) 0 (str p (string/join "" (repeat cnt path))) (get s (inc pos)))))
         {:pos ii, :path p}))))
 
-(comment 
-  (parse (string/split "3[a]" #"") 0))
+(defn decode-string [s]
+  (let [chars (string/split s #"")]
+    (-> chars
+        (parse 0)
+        (:path))))
 
+(comment
+  (decode-string "3[a]")) ;=> "aaa"
+(comment
+  (decode-string "3[a2[c]]")) ;=> "accaccacc"
+(comment
+  (decode-string "2[abc]3[cd]ef")) ;=> "abcabccdcdcdef"
 
 
